@@ -1,13 +1,16 @@
 package sample;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+
 
 public class Right extends BorderPane {
-
+    Button Quit = new Button();
     public Right(){
         setTop(top());
         setCenter(centre());
@@ -15,23 +18,23 @@ public class Right extends BorderPane {
     }
 
 
-    private VBox top(){
-        VBox top = new VBox();
-        HBox a = new HBox();
-        HBox b = new HBox();
+    private GridPane top(){
+        GridPane set = new GridPane();
         TextField search = new TextField();
-        Label search_label = new Label();
-        search_label.setText("Search: ");
-        Button sign_in = new Button();
-        Button Log_in = new Button();
-        sign_in.setText("Sign in");
-        Log_in.setText("Log in");
-        a.getChildren().addAll(search_label,search);
-        b.getChildren().addAll(sign_in,Log_in);
-        b.setAlignment(Pos.CENTER);
-        top.getChildren().addAll(a,b);
-        top.setMaxSize(220,200);
-        return top;
+        Label search_label = new Label("Search: ");
+        Button sign_up = new Button("Sign up");
+        Button Log_in = new Button("Log in");
+
+        Log_in.setOnAction(e->new Account().account());
+        sign_up.setOnAction(e->new Registration().Reg());
+
+
+        set.add(search,1,0);
+        set.add(search_label,0,0);
+        set.add(sign_up,0,1);
+        set.add(Log_in,1,1);
+
+        return set;
     }
 
     private StackPane centre() {
@@ -45,13 +48,14 @@ public class Right extends BorderPane {
         return centre;
     }
 
-    private HBox bottom() {
+    public HBox bottom() {
         HBox bottom = new HBox();
-        Button Quit = new Button();
+
         Quit.setText("      Quit        ");
+        //Quit.setStyle("-fx-background-color: red");
         bottom.setAlignment(Pos.CENTER_RIGHT);
         bottom.getChildren().addAll(Quit);
-        bottom.setMaxSize(220,200);
+        //bottom.setMaxSize(220,200);
         return bottom;
     }
 }
