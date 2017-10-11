@@ -32,7 +32,7 @@ public class credit {
     {
         if(c.validFrom.compareTo(c.goodThru) <= 0)
         {
-            throw new  RuntimeException("Error:  Credit Card expiration date is invalid");
+            return false;
         }
         else
         {
