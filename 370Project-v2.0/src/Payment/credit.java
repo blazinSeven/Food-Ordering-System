@@ -48,10 +48,17 @@ public class credit {
 
      Date testDate1 = new Date (1994, 3, 8 );
      Date testDate2 = new Date (1994, 3, 9);
+     credit testCard = new credit(123, 123, "Visa", testDate2, testDate2);
 
-     credit testCard = new credit(123, 123,"Visa", testDate1, testDate2);
 
-     testCard.isDateValid(testCard);
+     try {
+         testCard.isDateValid(testCard);
+     }
+     catch (RuntimeException e)
+        {
+            System.out.print("Error: Expiration Date is invalid");
+
+        }
     }
 
 
