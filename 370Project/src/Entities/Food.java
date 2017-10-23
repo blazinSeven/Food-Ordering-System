@@ -12,13 +12,26 @@ public class Food {
     private String name;
     private double price;
     private Duration prepTime;
+    final int dishesID;
 
-    public Food(String foodName, double foodPrice, Duration expectedPrepTime)
+    public Food(String foodName, double foodPrice, Duration expectedPrepTime, int ID )
     {
         this.name = foodName;
         this.price = foodPrice;
         this.prepTime = expectedPrepTime;
+        this.dishesID = ID;
     }
+
+
+    /**
+     * IN: Nothing
+     * OUT: Returns the dishesID for the food object
+     */
+    public int getDishesID()
+    {
+        return this.dishesID;
+    }
+
 
     /**
      * IN: The new price to be added to the food item
@@ -84,7 +97,7 @@ public class Food {
     //Basic testing for simple "accessors" & "mutators"
     public static void main(String[] args)
     {
-        Food tendies = new Food("Tendies", 6.9, Duration.ofHours(1));
+        Food tendies = new Food("Tendies", 6.9, Duration.ofHours(1), 7);
         System.out.print(tendies.getName()+ " "+tendies.getPrice() +" "+ tendies.getPrepTime());
 
         tendies.setPrice(4.20);
