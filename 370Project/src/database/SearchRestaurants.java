@@ -8,7 +8,7 @@ public class SearchRestaurants {
     GoConnection connection = new GoConnection();
     public String message = null;
     public String restaurantFound = null;
-
+    public int k;
     public void SearchRestaurant(String search)
     {
         connection.connect();
@@ -35,6 +35,7 @@ public class SearchRestaurants {
                                     "Restaurant Close Time: " + rs.getString("close_time")+ "\n"+
                                     "Restaurant Phone Number: " + rs.getString("phone_num")+ "\n" +
                                     "Restaurant E-Mail: " + rs.getString("e_mail_address");
+                    k=rs.getInt("id");
                     message = "Found";
                     connection.coon.close();
                 }

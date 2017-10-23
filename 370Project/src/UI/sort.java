@@ -5,6 +5,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Create By Hao Li at Oct. 15th
+ */
 public class sort extends VBox{
     CheckBox sort1 = new CheckBox();
     CheckBox sort2 = new CheckBox();

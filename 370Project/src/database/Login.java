@@ -1,7 +1,5 @@
 package database;
 
-import UI.user_account;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +8,7 @@ import java.util.Scanner;
 public class Login {
     GoConnection connection = new GoConnection();
     public String message = null;
-    public String name = "no";
+    public String name = null;
     //user_account user = new user_account();
 
     public void login(String username, String password)
