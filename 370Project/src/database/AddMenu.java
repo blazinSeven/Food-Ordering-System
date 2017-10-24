@@ -78,7 +78,7 @@ public class AddMenu {
                         connection.coon.close();
                     }
                     else {
-                        String addMenuQuery = "INSERT INTO menus (restuarant_id, menu_name) VALUES (?,?)";
+                        String addMenuQuery = "INSERT INTO menus (restaurant_id, menu_name) VALUES (?,?)";
                         PreparedStatement ppStmt = connection.coon.prepareStatement(addMenuQuery);
                         ppStmt.setInt(1, restuarant_id);
                         ppStmt.setString(2, menuName);
@@ -101,7 +101,7 @@ public class AddMenu {
     public static void main(String args[])
     {
         AddMenu addMenu = new AddMenu();
-        addMenu.AddMenu(6, "SANDWICHES & WRAPS");
+        addMenu.AddMenu(1, "SANDWICHES & WRAPS");
         System.out.println(addMenu.message);
     }
 }
