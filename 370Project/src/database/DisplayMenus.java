@@ -50,12 +50,12 @@ public class DisplayMenus
      *
      * The function prints out all items for a given menu
      */
-    public void displayItem()
+    public void displayItem(int menuID)
     {
         connection.connect();
         if(connection.coon != null)
         {
-            String selectQuery = "SELECT dish_name FROM menus m, dishes d WHERE d.id = m.id";
+            String selectQuery = "SELECT dish_name FROM menus m, dishes d WHERE d.id = m.menu_id";
             try
             {
                 Statement stmt = connection.coon.createStatement();
@@ -79,6 +79,14 @@ public class DisplayMenus
         {
         System.out.print("Error: A connection could not be established.  ");
         }
+
+    }
+
+    public static void main(String[] args)
+    {
+        DisplayMenus testMenu = new DisplayMenus();
+        testMenu.displayAllMenus();
+        testMenu.displayItem(5);
 
     }
 
