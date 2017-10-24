@@ -33,7 +33,7 @@ public class DisplayDishes {
                     dishesDisplay.add(results.getString("dish_name"));
                     rowCount++;
                 }
-                System.out.println("Total restaurant: " + rowCount);
+                System.out.println("Total Dishes: " + rowCount);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -42,6 +42,18 @@ public class DisplayDishes {
             System.out.print("Error: A connection could not be established.  ");
         }
     }
+
+
+    //Main for testing
+    public static void main(String[] args)
+    {
+
+        DisplayDishes testDisplay = new DisplayDishes();
+
+        //Print to console all food in the database
+        testDisplay.displayDishes();
+    }
+
 
 
 
