@@ -107,7 +107,7 @@ public class Food {
 
         tendies.setPrice(4.20);
         tendies.setPrepTime(Duration.ZERO.withSeconds(120));
-        tendies.setName("HELLA NUGS");
+        tendies.setName("Burgers");
 
         System.out.println();
         System.out.println(":  Updated after mutation: " + tendies.getName()+ " "+tendies.getPrice() +" "+ tendies.getPrepTime());
