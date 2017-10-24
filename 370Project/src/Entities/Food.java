@@ -17,7 +17,7 @@ public class Food {
     private String name;
     private double price;
     private Duration prepTime;
-    final int dishesID;
+    private final int dishesID;
 
     public Food(String foodName, double foodPrice, Duration expectedPrepTime, int ID )
     {
