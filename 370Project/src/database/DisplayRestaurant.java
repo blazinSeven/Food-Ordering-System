@@ -1,9 +1,11 @@
 package database;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DisplayRestaurant {
 
@@ -36,10 +38,67 @@ public class DisplayRestaurant {
     }
 
 
+    public void displayRestaurantFromID(int restID)
+    {
+        connect.connect();
+        if (connect.coon != null) {
+            String selectQuery = "SELECT * FROM restaurants WHERE id = ? ";
+            try {
+                PreparedStatement ppstmt = connect.coon.prepareStatement(selectQuery);
+                ppstmt.setInt(1,restID);
+                ResultSet results = ppstmt.executeQuery();
+                if(results.next())
+                {
+                    System.out.print(results.getString("restaurant_name" ));
+                }
+                restaurantDisplay = new ArrayList<String>();
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    //Helper
+    private void queryForRestaurantName(int restID)
+    {
+        connect.connect();
+        if (connect.coon != null) {
+            String selectQuery = "SELECT restaurant_name FROM restaurants WHERE id = ? ";
+            try {
+                PreparedStatement ppstmt = connect.coon.prepareStatement(selectQuery);
+                ppstmt.setInt(1,restID);
+                ResultSet results = ppstmt.executeQuery();
+                if(results.next())
+                {
+                     System.out.print(results.getString("restaurant_name" ));
+                }
+
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public String getRestaurantName(int restID)
+    {
+        Scanner inScanner = new Scanner(System.in);
+        String restName = inScanner.nextLine();
+        queryForRestaurantName(restID);
+        return restName;
+    }
+
+
+
     public static void main(String arg[])
     {
         DisplayRestaurant restaurant = new DisplayRestaurant();
-        restaurant.displayRestaurant();
-        System.out.println(restaurant.restaurantDisplay);
+     //   restaurant.displayRestaurant();
+     //   System.out.println(restaurant.restaurantDisplay);
+
+       String testRest = restaurant.getRestaurantName(1);
+       System.out.print(testRest);
+       // restaurant.displayRestaurantFromID(1);
     }
 }
