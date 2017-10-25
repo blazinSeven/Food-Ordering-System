@@ -47,7 +47,11 @@ public class GetDistance {
         String destination = in.nextLine();
         GetDistance getDistance = new GetDistance();
         getDistance.getDistance(origin,destination);
+        //Test with string
         System.out.println(getDistance.getDistance);
+        Float getDistanceNum = Float.valueof(getDistance.getDistance);
+        //Test with float
+        System.out.println(getDistanceNum);
         in.close();
     }
 }
