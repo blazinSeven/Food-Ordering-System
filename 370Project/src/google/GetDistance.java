@@ -6,6 +6,7 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.Distance;
 import com.google.maps.model.DistanceMatrix;
+import sun.misc.FloatingDecimal;
 
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class GetDistance {
      */
     GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyCbZwJ0Y8Qw01YObRvoNXCasw2mLimHMZw").build();
     String getDistance = null;
+    Float distanceFloat;
 
     /**
      * When Call this function, you will get the distance between origin and destination
@@ -33,10 +35,33 @@ public class GetDistance {
             distance.getClass().getResource(result.routes.clone().toString());
             DistanceMatrix distanceMatrix = DistanceMatrixApi.getDistanceMatrix(context, orig, dest).awaitIgnoreError();
             getDistance = distanceMatrix.rows[0].elements[0].distance.humanReadable;
+            //distanceFloat = Float.valueOf(distanceMatrix.rows[0].elements[0].distance.humanReadable.toString());
 
 
         }
     }
+
+    /**
+     * getFloat function that use for change string distance that get from google to float
+     * @param s
+     * @return
+     */
+    float getFloat(String s)
+    {
+        String result="";
+        for(int c = 0; c< s.length(); c++)
+        {
+            Character character = s.charAt(c);
+            if(Character.isDigit(character))
+            {
+                result += character;
+            }
+        }
+        float f = Float.valueOf(result);
+        return f;
+
+    }
+
 
     public static void main (String arg[])
     {
@@ -49,9 +74,9 @@ public class GetDistance {
         getDistance.getDistance(origin,destination);
         //Test with string
         System.out.println(getDistance.getDistance);
-        Float getDistanceNum = Float.valueof(getDistance.getDistance);
+        //Float getDistanceNum = Float.valueOf(getDistance.getDistance);
         //Test with float
-        System.out.println(getDistanceNum);
+        System.out.println(getDistance.getFloat(getDistance.getDistance));
         in.close();
     }
 }
