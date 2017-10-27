@@ -10,7 +10,7 @@ public class AddCustomers {
     GoConnection connect = new GoConnection();
     public AddUser addUser = null;
     public String message = null;
-
+    public int userId =1024;
     public void setCustomerInfo(String firstName, String lastName, String phoneNum, String eMail, String prefFood)
     {
         connect.connect();
@@ -22,7 +22,7 @@ public class AddCustomers {
                 Statement stmt = connect.coon.createStatement();
                 ResultSet results = stmt.executeQuery(getUserId);
                 results.next();
-                int userId = results.getInt(1);
+                userId = results.getInt(1);
                 PreparedStatement ppStmt = connect.coon.prepareStatement(addQuery);
                 ppStmt.setInt(1,userId);
                 ppStmt.setString(2,firstName);
