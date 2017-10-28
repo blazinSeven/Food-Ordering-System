@@ -26,6 +26,7 @@ public class AddCustomers {
      * String message for public
      */
     public String message = null;
+<<<<<<< HEAD
 
     /**
      * The function to add an customer's information to the database
@@ -35,6 +36,9 @@ public class AddCustomers {
      * @param eMail
      * @param prefFood
      */
+=======
+    public int userId =1024;
+>>>>>>> a6e67950c467d0c35a3c17854f70d7f72511b354
     public void setCustomerInfo(String firstName, String lastName, String phoneNum, String eMail, String prefFood)
     {
         /**
@@ -51,7 +55,7 @@ public class AddCustomers {
                 Statement stmt = connect.coon.createStatement();
                 ResultSet results = stmt.executeQuery(getUserId);
                 results.next();
-                int userId = results.getInt(1);
+                userId = results.getInt(1);
                 PreparedStatement ppStmt = connect.coon.prepareStatement(addQuery);
                 ppStmt.setInt(1,userId);
                 ppStmt.setString(2,firstName);

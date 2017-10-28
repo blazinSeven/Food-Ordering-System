@@ -1,9 +1,11 @@
 package UI.Account;
 
 import database.AddCustomers;
+import database.AddLocation;
 import database.AddRestaurants;
 import database.AddUser;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +19,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.sql.Time;
+import java.util.Objects;
 
 /**
  * Create By Hao Li at Oct. 12th
@@ -81,6 +84,7 @@ class Registration {
         // creation
         Stage restaurantReg = new Stage();
         GridPane res_pane = new GridPane();
+        VBox box = new VBox();
         restaurantReg.setTitle("RESTAURANT REGISTER");
 
         // Labels
@@ -93,6 +97,12 @@ class Registration {
         Label phone_num = new Label("Phone Number: ");
         Label account = new Label("Username: ");
         Label password = new Label("Password: ");
+        Label city = new Label("City: ");
+        Label str_number = new Label("Street Number: ");
+        Label str_name = new Label("Street Name: ");
+        Label province = new Label("Province: ");
+        Label post_code = new Label("Post Code: ");
+        Label confirm = new Label("Confirm Password: ");
         Label error = new Label(" ");
         error.setWrapText(true);
 
@@ -106,22 +116,49 @@ class Registration {
         TextField phoneNum_field = new TextField();
         TextField account_field = new TextField();
         PasswordField password_field = new PasswordField();
+        TextField province_field = new TextField();
+        TextField city_field = new TextField();
+        TextField strname_field = new TextField();
+        TextField strNum_field = new TextField();
+        TextField pcode_field = new TextField();
+        PasswordField confirm_field = new PasswordField();
 
         //Button
         Button submit = new Button("SUBMIT");
 
         //padding
-        reg.setPadding(new Insets(0, 5, 25, 0));
-        res_name.setPadding(new Insets(10, 5, 10, 85));
-        lic_num.setPadding(new Insets(10, 5, 10, 85));
-        open_time.setPadding(new Insets(10, 5, 10, 85));
-        close_time.setPadding(new Insets(10, 5, 10, 85));
-        email.setPadding(new Insets(10, 5, 10, 85));
-        phone_num.setPadding(new Insets(10, 5, 10, 85));
-        account.setPadding(new Insets(10, 5, 10, 85));
-        password.setPadding(new Insets(10, 5, 10, 85));
-        error.setPadding(new Insets(10, 5, 10, 85));
-        res_pane.setPadding(new Insets(50, 80, 100, 30));
+        res_name.setPadding(new Insets(10, 5, 0, 25));
+        lic_num.setPadding(new Insets(10, 5, 0, 25));
+        open_time.setPadding(new Insets(10, 5, 0, 25));
+        close_time.setPadding(new Insets(10, 5, 0, 25));
+        city.setPadding(new Insets(10, 5, 0, 25));
+        password.setPadding(new Insets(10, 5, 0, 25));
+        confirm.setPadding(new Insets(10, 5, 0, 25));
+        email.setPadding(new Insets(10, 5, 0, 25));
+        phone_num.setPadding(new Insets(10, 5, 0, 25));
+        account.setPadding(new Insets(10, 5, 0, 25));
+        str_name.setPadding(new Insets(10, 5, 0, 25));
+        str_number.setPadding(new Insets(10, 5, 0, 25));
+        post_code.setPadding(new Insets(10, 5, 0, 25));
+        province.setPadding(new Insets(10, 5, 0, 25));
+        error.setPadding(new Insets(10, 5, 0, 25));
+
+
+        //Margin
+        GridPane.setMargin(restName_field,new Insets(0,5,0,25));
+        GridPane.setMargin(licenseId_field,new Insets(0,5,0,25));
+        GridPane.setMargin(account_field,new Insets(0,5,0,25));
+        GridPane.setMargin(password_field,new Insets(0,5,0,25));
+        GridPane.setMargin(confirm_field,new Insets(0,5,0,25));
+        GridPane.setMargin(email_field,new Insets(0,5,0,25));
+        GridPane.setMargin(phoneNum_field,new Insets(0,5,0,25));
+        GridPane.setMargin(strname_field,new Insets(0,5,0,25));
+        GridPane.setMargin(strNum_field,new Insets(0,5,0,25));
+        GridPane.setMargin(city_field,new Insets(0,5,0,25));
+        GridPane.setMargin(province_field,new Insets(0,5,0,25));
+        GridPane.setMargin(pcode_field,new Insets(0,5,0,25));
+        GridPane.setMargin(openTime_field,new Insets(0,5,0,25));
+        GridPane.setMargin(closeTime_field,new Insets(0,5,0,25));
 
 
         // listener for submit button
@@ -143,30 +180,43 @@ class Registration {
         });
 
         // add all
-        res_pane.add(reg, 1, 0);
+        res_pane.add(error, 1, 0);
         res_pane.add(res_name, 0, 1);
-        res_pane.add(restName_field, 1, 1);
-        res_pane.add(lic_num, 0, 2);
+        res_pane.add(restName_field, 0, 2);
+        res_pane.add(lic_num, 1, 1);
         res_pane.add(licenseId_field, 1, 2);
         res_pane.add(open_time, 0, 3);
-        res_pane.add(openTime_field, 1, 3);
-        res_pane.add(close_time, 0, 4);
+        res_pane.add(openTime_field, 0, 4);
+        res_pane.add(close_time, 1, 3);
         res_pane.add(closeTime_field, 1, 4);
         res_pane.add(email, 0, 5);
-        res_pane.add(email_field, 1, 5);
-        res_pane.add(phone_num, 0, 6);
+        res_pane.add(email_field, 0, 6);
+        res_pane.add(phone_num, 1, 5);
         res_pane.add(phoneNum_field, 1, 6);
         res_pane.add(account, 0, 7);
-        res_pane.add(account_field, 1, 7);
-        res_pane.add(password, 0, 8);
-        res_pane.add(password_field, 1, 8);
-        res_pane.add(error, 1, 9);
-        res_pane.add(submit, 2, 10);
+        res_pane.add(account_field, 0, 8);
+        res_pane.add(post_code,1,7);
+        res_pane.add(pcode_field,1,8);
+        res_pane.add(password, 0, 9);
+        res_pane.add(password_field, 0, 10);
+        res_pane.add(confirm, 1, 9);
+        res_pane.add(confirm_field,1,10);
+        res_pane.add(str_number,0,11);
+        res_pane.add(strNum_field,0,12);
+        res_pane.add(str_name,1,11);
+        res_pane.add(strname_field,1,12);
+        res_pane.add(city,0,13);
+        res_pane.add(city_field,0,14);
+        res_pane.add(province,1,13);
+        res_pane.add(province_field,1,14);
+        res_pane.add(submit,2,16);
+        res_pane.setPadding(new Insets(0, 5, 0, 65));
 
         //size
-        restaurantReg.setMinHeight(550);
-        restaurantReg.setMinWidth(450);
-        Scene scene = new Scene(res_pane);
+        box.getChildren().addAll(reg,res_pane);
+        box.setAlignment(Pos.CENTER);
+        box.setPrefSize(630,550);
+        Scene scene = new Scene(box);
         scene.getStylesheets().add("css/register_style.css");
         restaurantReg.setScene(scene);
         restaurantReg.show();
@@ -179,9 +229,9 @@ class Registration {
         // creation
         Stage customerReg = new Stage();
         GridPane reg_pane = new GridPane();
+        VBox box = new VBox();
         customerReg.setTitle("CUSTOMER REGISTER");
-        customerReg.setMinHeight(550);
-        customerReg.setMinWidth(450);
+
 
         //Buttons
         Button signUp = new Button("SUBMIT ");
@@ -194,8 +244,13 @@ class Registration {
         Label last_name = new Label("Last name: ");
         Label phone_number = new Label("Phone#: ");
         Label email = new Label("E-mail: ");
-        Label pref_food = new Label("Pref Food: ");
+        Label str_number = new Label("Street Number: ");
+        Label str_name = new Label("Street Name: ");
+        Label city = new Label("City: ");
         Label error = new Label(" ");
+        Label post_code = new Label("Post Code: ");
+        Label confirm_password = new Label("Confirm Password: ");
+        Label prefer_food = new Label("Prefer Food: ");
         error.setWrapText(true);
 
         //Fields
@@ -203,21 +258,48 @@ class Registration {
         TextField lastName_field = new TextField();
         TextField phoneNum_field = new TextField();
         TextField email_field = new TextField();
-        TextField pref_field = new TextField();
         TextField account_field = new TextField();
         PasswordField password_field = new PasswordField();
+        TextField pref_field = new TextField();
+        TextField city_field = new TextField();
+        TextField strname_field = new TextField();
+        TextField strNum_field = new TextField();
+        TextField pcode_field = new TextField();
+        PasswordField confirm_field = new PasswordField();
+
+
+
 
         //padding
-        reg.setPadding(new Insets(0, 5, 25, 0));
-        first_name.setPadding(new Insets(10, 5, 10, 85));
-        last_name.setPadding(new Insets(10, 5, 10, 85));
-        email.setPadding(new Insets(10, 5, 10, 85));
-        phone_number.setPadding(new Insets(10, 5, 10, 85));
-        account.setPadding(new Insets(10, 5, 10, 85));
-        password.setPadding(new Insets(10, 5, 10, 85));
-        pref_food.setPadding(new Insets(10, 5, 10, 85));
-        error.setPadding(new Insets(10, 5, 10, 85));
-        reg_pane.setPadding(new Insets(50, 80, 100, 50));
+        //reg.setPadding(new Insets(20, 30, 25, 0));
+        first_name.setPadding(new Insets(0, 5, 0, 25));
+        last_name.setPadding(new Insets(0, 5, 0, 25));
+        confirm_password.setPadding(new Insets(10, 5, 0, 25));
+        city.setPadding(new Insets(10, 5, 0, 25));
+        str_name.setPadding(new Insets(10, 5, 0, 25));
+        str_number.setPadding(new Insets(10, 5, 0, 25));
+        email.setPadding(new Insets(10, 5, 0, 25));
+        phone_number.setPadding(new Insets(10, 5, 0, 25));
+        account.setPadding(new Insets(10, 5, 0, 25));
+        password.setPadding(new Insets(10, 5, 0, 25));
+        prefer_food.setPadding(new Insets(10, 5, 0, 25));
+        error.setPadding(new Insets(10, 5, 0, 25));
+        reg_pane.setPadding(new Insets(0, 5, 0, 65));
+        post_code.setPadding(new Insets(10, 5, 0, 25));
+
+        //Margin
+        GridPane.setMargin(firstName_field,new Insets(0,5,0,25));
+        GridPane.setMargin(lastName_field,new Insets(0,5,0,25));
+        GridPane.setMargin(account_field,new Insets(0,5,0,25));
+        GridPane.setMargin(password_field,new Insets(0,5,0,25));
+        GridPane.setMargin(confirm_field,new Insets(0,5,0,25));
+        GridPane.setMargin(email_field,new Insets(0,5,0,25));
+        GridPane.setMargin(phoneNum_field,new Insets(0,5,0,25));
+        GridPane.setMargin(strname_field,new Insets(0,5,0,25));
+        GridPane.setMargin(strNum_field,new Insets(0,5,0,25));
+        GridPane.setMargin(city_field,new Insets(0,5,0,25));
+        GridPane.setMargin(pref_field,new Insets(0,5,0,25));
+        GridPane.setMargin(pcode_field,new Insets(0,5,0,25));
 
 
         //Font
@@ -228,19 +310,30 @@ class Registration {
         phone_number.setFont(new Font(12));
         account.setFont(new Font(12));
         password.setFont(new Font(12));
-        pref_food.setFont(new Font(12));
-
+        str_name.setFont(new Font(12));
+        str_number.setFont(new Font(12));
+        city.setFont(new Font(12));
+        post_code.setFont(new Font(12));
+        confirm_password.setFont(new Font(12));
+        prefer_food.setFont(new Font(12));
 
         signUp.setOnAction(ActionEvent -> {
             AddCustomers addCustomers = new AddCustomers();
+            AddLocation addLocation = new AddLocation();
             addUser.addUser(account_field.getText(), password_field.getText(), "c");
-            if (addUser.message == "You have successfully signed up") {
+            if (Objects.equals(addUser.message, "You have successfully signed up")) {
                 addCustomers.addUser = addUser;
                 addCustomers.setCustomerInfo(firstName_field.getText(), lastName_field.getText(), phoneNum_field.getText(), email_field.getText(), pref_field.getText());
-                if (addCustomers.message == "The customer information has been saved") {
-                    customerReg.close();
-                    Reg_windows.close();
-                    pop();
+
+                if (Objects.equals(addCustomers.message, "The customer information has been saved")) {
+                    if (addCustomers.userId!=1024){
+                        int street_Num = Integer.parseInt(strNum_field.getText());
+                        addLocation.addLocations(addCustomers.userId,street_Num,strname_field.getText(),city_field.getText(),"Saskatchewan",pcode_field.getText());
+                        customerReg.close();
+                        Reg_windows.close();
+                        pop();
+                    }
+
                 }
             } else {
                 error.setTextFill(Color.RED);
@@ -250,27 +343,41 @@ class Registration {
         });
 
         // Add all
-        reg_pane.add(reg, 1, 0);
-        reg_pane.add(first_name, 0, 2);
-        reg_pane.add(firstName_field, 1, 2);
-        reg_pane.add(last_name, 0, 3);
-        reg_pane.add(lastName_field, 1, 3);
-        reg_pane.add(email, 0, 4);
-        reg_pane.add(email_field, 1, 4);
-        reg_pane.add(phone_number, 0, 5);
-        reg_pane.add(phoneNum_field, 1, 5);
-        reg_pane.add(account, 0, 6);
-        reg_pane.add(account_field, 1, 6);
-        reg_pane.add(password, 0, 7);
-        reg_pane.add(password_field, 1, 7);
-        reg_pane.add(pref_food, 0, 8);
-        reg_pane.add(pref_field, 1, 8);
-        reg_pane.add(error, 1, 9);
-        reg_pane.add(signUp, 2, 10);
+        reg_pane.add(error, 1, 0);
+        reg_pane.add(first_name, 0, 1);
+        reg_pane.add(firstName_field, 0, 2);
+        reg_pane.add(last_name, 1, 1);
+        reg_pane.add(lastName_field, 1, 2);
+        reg_pane.add(account, 0, 3);
+        reg_pane.add(account_field, 0, 4);
+        reg_pane.add(prefer_food, 1, 3);
+        reg_pane.add(pref_field, 1, 4);
+        reg_pane.add(password,0,5);
+        reg_pane.add(password_field,0,6);
+        reg_pane.add(confirm_password,1,5);
+        reg_pane.add(confirm_field,1,6);
+        reg_pane.add(phone_number, 0, 7);
+        reg_pane.add(phoneNum_field, 0, 8);
+        reg_pane.add(email, 1, 7);
+        reg_pane.add(email_field, 1, 8);
+        reg_pane.add(str_number, 0, 9);
+        reg_pane.add(strNum_field, 0, 10);
+        reg_pane.add(str_name,1,9);
+        reg_pane.add(strname_field,1,10);
+        reg_pane.add(city,0,11);
+        reg_pane.add(city_field,0,12);
+        reg_pane.add(post_code,1,11);
+        reg_pane.add(pcode_field,1,12);
+        reg_pane.add(signUp, 2, 14);
 
-        Scene scene = new Scene(reg_pane);
+        box.setPrefSize(630,500);
+        box.setAlignment(Pos.CENTER);
+        box.getChildren().addAll(reg,reg_pane);
+        Scene scene = new Scene(box);
         scene.getStylesheets().add("css/register_style.css");
         customerReg.setScene(scene);
+        System.out.println(reg_pane.getWidth());
+        System.out.println(reg_pane.getHeight());
         customerReg.show();
     }
 

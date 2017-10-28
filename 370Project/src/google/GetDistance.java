@@ -10,6 +10,10 @@ import sun.misc.FloatingDecimal;
 
 import java.util.Scanner;
 
+/**
+ * Created by Yinsheng Dong(yid164)
+ * This class is using Google API to get distance between 2 positions
+ **/
 public class GetDistance {
 
     /**
@@ -20,11 +24,12 @@ public class GetDistance {
     Float distanceFloat;
 
     /**
-     * When Call this function, you will get the distance between origin and destination
+     * When Call this function, you will get the String of distance between origin and destination
      * @param origin
      * @param destination
+     * @return a string
      */
-    public void getDistance(String origin, String destination) {
+    public String getDistanceString(String origin, String destination) {
 
         if (context != null) {
             System.out.println("Connect");
@@ -37,32 +42,36 @@ public class GetDistance {
             getDistance = distanceMatrix.rows[0].elements[0].distance.humanReadable;
             //distanceFloat = Float.valueOf(distanceMatrix.rows[0].elements[0].distance.humanReadable.toString());
 
-
         }
+        return getDistance;
+
     }
 
     /**
-     * getFloat function that use for change string distance that get from google to float
-     * @param s
-     * @return
+     * getFloatDistance function so will get the float of distance between origin and destination
+     * @param orign, destiantion
+     * @return a float
      */
-    float getFloat(String s)
+    public float getFloatDistance(String origin, String destination)
     {
         String result="";
-        for(int c = 0; c< s.length(); c++)
+        String toConvert = getDistanceString(origin,destination);
+        for(int c = 0; c< toConvert.length(); c++)
         {
-            Character character = s.charAt(c);
-            if(Character.isDigit(character))
+            Character character = toConvert.charAt(c);
+            if(!Character.isLetter(character))
             {
                 result += character;
             }
         }
-        float f = Float.valueOf(result);
-        return f;
-
+        distanceFloat = Float.valueOf(result);
+        return distanceFloat;
     }
 
 
+    /**
+     * Main function for testing
+     **/
     public static void main (String arg[])
     {
         Scanner in = new Scanner(System.in);
@@ -70,13 +79,13 @@ public class GetDistance {
         String origin = in.nextLine();
         System.out.println("Please enter the final destination:  \n");
         String destination = in.nextLine();
-        GetDistance getDistance = new GetDistance();
-        getDistance.getDistance(origin,destination);
+        GetDistance getDistance = new GetDistance();;
         //Test with string
-        System.out.println(getDistance.getDistance);
+        //System.out.println(getDistance.getDistance);
         //Float getDistanceNum = Float.valueOf(getDistance.getDistance);
         //Test with float
-        System.out.println(getDistance.getFloat(getDistance.getDistance));
+        //System.out.println(getDistance.getFloatDistance(origin,destination));
+        //System.out.println(getDistance.getDistanceString(origin,destination));
         in.close();
     }
 }
