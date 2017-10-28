@@ -3,17 +3,44 @@ package database;
 import java.sql.*;
 import java.util.Scanner;
 
+
+/**
+ * Written by Yinsheng Dong (yid164)
+ * This class is used to add an restaurant information
+ */
 public class AddRestaurants {
+    /**
+     * connection of database
+     */
     GoConnection connect = new GoConnection();
+
+    /**
+     * when a restaurant info is added, we have to add the user first
+     */
     public AddUser addUser = null;
+
+    /**
+     * String message
+     */
     public String message = null;
 
+    /**
+     * The setRestaurant information function, to insert teh params
+     * @param restName restaurant name
+     * @param licenseId licensed id
+     * @param openTime open time
+     * @param closeTime close time
+     * @param phone_num restaurant phone number
+     * @param emailAddress restaurant address
+     */
     public void setRestaurantInfo(String restName, String licenseId, Time openTime, Time closeTime, String phone_num, String emailAddress)
     {
+        // connect first
         connect.connect();
         if (connect.coon != null)
         {
             try{
+                // getting user id from data, then insert them to the database
                 String getUserId = "select id from users where username = '" + addUser.un +"'";
                 String addQuery = "insert into restaurants (user_id, restaurant_name, license_id, open_time, close_time,phone_num, e_mail_address) values (?,?,?,?,?,?,?)";
                 Statement stmt = connect.coon.createStatement();
@@ -43,6 +70,10 @@ public class AddRestaurants {
         }
     }
 
+    /**
+     * main function for testing
+     * @param arg
+     */
     public static void main(String arg[])
     {
         AddUser addUser = new AddUser();

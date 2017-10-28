@@ -5,12 +5,38 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/**
+ * Create by Yinsheng Dong (yid164)
+ * This class is used to add an user, this should be before add customer and restaurant
+ **/
 public class AddUser {
+    /**
+     * New connection
+     **/
     public GoConnection connect = new GoConnection();
-    public String st = null;
-    public String un = null;
-    public String message = "haha";
 
+    /**
+     * this is for user_status
+     */
+    public String st = null;
+
+    /**
+     * this is for username
+     */
+    public String un = null;
+
+    /**
+     * public message
+     */
+    public String message = "";
+
+    /**
+     * The function is use for inserting an user to the database
+     * @param username username that user created
+     * @param userPassword password that user created
+     * @param status if they are restaurant or not
+     * @Pre the username has not been used
+     */
     public void addUser(String username, String userPassword, String status)
     {
         connect.connect();
@@ -18,6 +44,7 @@ public class AddUser {
         {
 
             try {
+                // check if the username has been used or not
                 String checkQuery = "select username from users where username = ?";
                 PreparedStatement checkStmt = connect.coon.prepareStatement(checkQuery);
                 checkStmt.setString(1,username);
@@ -32,6 +59,7 @@ public class AddUser {
 
                 else
                 {
+                    // if not used username, then insert them to database
                     String insertQuery = "insert into users (username, passwords, user_status) values(?,?,?)";
                     PreparedStatement ppStmt = connect.coon.prepareStatement(insertQuery);
                     un = username;
@@ -54,6 +82,10 @@ public class AddUser {
         }
     }
 
+    /**
+     * main function for testing
+     * @param arg
+     */
     public static void main (String arg[])
     {
         AddUser addUser = new AddUser();

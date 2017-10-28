@@ -4,17 +4,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Written by Yinsheng Dong (yid164)
+ * This function is using to add Menu of A restaurant
+ */
 public class AddMenu {
-    GoConnection connection = new GoConnection();
-    public  String message = null;
-    public String message1 = null;
-    public int rest_id;
 
-    public void getRestaurantId (String license_id)
+    /**
+     * new connection
+     */
+    GoConnection connection = new GoConnection();
+
+    /**
+     * message to print out
+     */
+    public  String message = null;
+    public String restaurantMessage = null;
+
+
+
+    /**
+     * The helper function to check the restaurant_id by using license_id
+     * @param license_id
+     */
+    public int getRestaurantId (String license_id)
     {
+        int restaurant_id = 0;
         if(license_id == null)
         {
-            message1 = "licensed id can not be null";
+            restaurantMessage = "licensed id can not be null";
         }
         else
         {
@@ -28,25 +46,31 @@ public class AddMenu {
                     ResultSet rs = checkRestppStmt.executeQuery();
                     if(!rs.next())
                     {
-                        message1 = "Did not find the restaurant id";
+                        restaurantMessage = "Did not find the restaurant id";
                         connection.coon.close();
                     }
                     else
                     {
-                        message1 = "The restaurant id has been found";
-                        rest_id =  rs.getInt("id");
+                        restaurantMessage = "The restaurant id has been found";
+                        restaurant_id =  rs.getInt("id");
                         connection.coon.close();
 
                     }
                 }
             }catch (SQLException e)
             {
-                message1 = e.getMessage();
+                restaurantMessage = e.getMessage();
             }
         }
+        return restaurant_id;
     }
 
-    public void AddMenu(int restuarant_id,String menuName)
+    /**
+     * The main part of this class, add menu information, using by restaurant_id and menuName
+     * @param restaurant_id
+     * @param menuName
+     */
+    public void AddMenu(int restaurant_id,String menuName)
     {
         if(menuName == null)
         {
@@ -60,12 +84,12 @@ public class AddMenu {
                 {
                     String checkQuery = "select menu_name from menus where restaurant_id = ? and menu_name = ?";
                     PreparedStatement checkppStmt = connection.coon.prepareStatement(checkQuery);
-                    checkppStmt.setInt(1,restuarant_id);
+                    checkppStmt.setInt(1,restaurant_id);
                     checkppStmt.setString(2,menuName);
                     ResultSet checkResult = checkppStmt.executeQuery();
                     String checkQuery1 = "select id from restaurants where id = ?";
                     PreparedStatement checkppStmt1 = connection.coon.prepareStatement(checkQuery1);
-                    checkppStmt1.setInt(1,restuarant_id);
+                    checkppStmt1.setInt(1,restaurant_id);
                     ResultSet checkResult1 = checkppStmt1.executeQuery();
                     if(checkResult.next())
                     {
@@ -80,7 +104,7 @@ public class AddMenu {
                     else {
                         String addMenuQuery = "INSERT INTO menus (restaurant_id, menu_name) VALUES (?,?)";
                         PreparedStatement ppStmt = connection.coon.prepareStatement(addMenuQuery);
-                        ppStmt.setInt(1, restuarant_id);
+                        ppStmt.setInt(1, restaurant_id);
                         ppStmt.setString(2, menuName);
                         int affected = ppStmt.executeUpdate();
                         if (affected > 0) {
@@ -98,6 +122,10 @@ public class AddMenu {
         }
     }
 
+    /**
+     * Testing function
+     * @param args
+     */
     public static void main(String args[])
     {
         AddMenu addMenu = new AddMenu();

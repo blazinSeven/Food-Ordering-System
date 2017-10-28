@@ -6,17 +6,46 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+/**
+ * Written by Yinsheng Dong (yid164)
+ * This function is using for insert a customer and set a customer information to the database
+ */
 public class AddCustomers {
+
+    /**
+     * new connection
+     */
     GoConnection connect = new GoConnection();
+
+    /**
+     * need first add an user then, add the customer
+     */
     public AddUser addUser = null;
+
+    /**
+     * String message for public
+     */
     public String message = null;
 
+    /**
+     * The function to add an customer's information to the database
+     * @param firstName
+     * @param lastName
+     * @param phoneNum
+     * @param eMail
+     * @param prefFood
+     */
     public void setCustomerInfo(String firstName, String lastName, String phoneNum, String eMail, String prefFood)
     {
+        /**
+         * connection
+         */
         connect.connect();
         if(connect.coon != null)
         {
             try{
+                // the query to insert customer's info to the data
+                // but we need to check if the user_id is stored or not
                 String addQuery = "insert into customers (user_id, customer_first_name, customer_last_name, phone_num, e_mail_address, pref_food) values (?,?,?,?,?,?)";
                 String getUserId = "select id from users where username = '" + addUser.un +"'";
                 Statement stmt = connect.coon.createStatement();
@@ -31,6 +60,7 @@ public class AddCustomers {
                 ppStmt.setString(5,eMail);
                 ppStmt.setString(6,prefFood);
                 int affected = ppStmt.executeUpdate();
+                // If it is executed, then the message to "saved"
                 if(affected > 0)
                 {
                     message = "The customer information has been saved";
@@ -45,6 +75,10 @@ public class AddCustomers {
         }
     }
 
+    /**
+     * Testing function
+     * @param arg
+     */
     public static void main(String arg[])
     {
         AddUser addUser = new AddUser();

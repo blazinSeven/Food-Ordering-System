@@ -7,6 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Written by Yinsheng Dong (yid164)
+ * This is just a helper class to check every restaurant in the sql database
+ */
 public class DisplayRestaurant {
 
     public ArrayList restaurantDisplay = null;

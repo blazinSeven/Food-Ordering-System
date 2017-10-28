@@ -5,23 +5,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/**
+ * Written by Yinsheng Dong (yid164)
+ * The main purpose of this class is to make a log in function, help to check if the username and
+ * password that user input are correct or not
+ */
 public class Login {
+
+    /**
+     * new connection
+     */
     GoConnection connection = new GoConnection();
+
+    /**
+     * public message to help other function know if they are correct or not
+     */
     public String message = null;
+
+    /**
+     * the username
+     */
     public String name = null;
     //user_account user = new user_account();
 
+
+    /**
+     * The login function that check the username and password
+     * @param username
+     * @param password
+     */
     public void login(String username, String password)
     {
+        // check connection first
         connection.connect();
         if(connection.coon!=null)
         {
             try {
+                // check these variables are exist or not
                 String queryString = "select * from users where username=? and passwords=?";
                 PreparedStatement ppStmt = connection.coon.prepareStatement(queryString);
                 ppStmt.setString(1,username);
                 ppStmt.setString(2,password);
                 ResultSet rs = ppStmt.executeQuery();
+                // giving the final message
                 if(!rs.next())
                 {
                     message = "Wrong username or password";
