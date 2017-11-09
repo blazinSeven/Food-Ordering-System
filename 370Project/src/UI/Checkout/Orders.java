@@ -2,11 +2,13 @@ package UI.Checkout;
 /**
  * Create By Hao Li at Nov. 7th
  */
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Stack;
@@ -31,6 +33,8 @@ public class Orders {
             place_order.UpdateChose(setIi());
             place_order.Updatenumber(settt());
         });
+        //set up Modality
+        go_orders.initModality(Modality.APPLICATION_MODAL);
         return checkout;
     }
     public void orders(){
@@ -43,7 +47,10 @@ public class Orders {
         orderPane.setBottom(place_order.bottom_buttons());
         /*set listeners*/
         //for place orders listeners
-        place_order.quit.setOnAction(e->go_orders.close());
+        place_order.quit.setOnAction(e->{
+            //go_orders.initModality(Modality.NONE);
+            go_orders.close();
+        });
         place_order.p_order.setOnAction(e->{
             orderPane.setCenter(payment_type.payment());
             orderPane.setBottom(null);
@@ -133,6 +140,9 @@ public class Orders {
         });
         Scene scene = new Scene(orderPane);
         go_orders.setScene(scene);
+
+
+
         go_orders.show();
     }
     
@@ -144,6 +154,8 @@ public class Orders {
         ii = new Stack<>();
         for (int i = 0; i< 10; i++){
             Label temp = new Label("hahah"+i);
+            temp.setPrefWidth(100);
+            temp.setAlignment(Pos.CENTER);
             ii.push(temp);
         }
         return ii;

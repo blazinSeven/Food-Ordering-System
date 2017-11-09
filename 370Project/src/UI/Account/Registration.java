@@ -16,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.sql.Time;
@@ -31,7 +32,10 @@ class Registration {
     private Stage Reg_windows = new Stage();
 
     private AddUser addUser = new AddUser();
-
+    Registration(){
+        // set up modality
+        Reg_windows.initModality(Modality.APPLICATION_MODAL);
+    }
 
     // choose button frame
     void Reg() {

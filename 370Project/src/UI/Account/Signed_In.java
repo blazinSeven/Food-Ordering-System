@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
  * Create By Hao Li at Oct. 12th
@@ -26,6 +27,9 @@ class Signed_In {
 
     // access
     Signed_In(){
+
+        // set up modality
+        windows.initModality(Modality.APPLICATION_MODAL);
         //change size for info & address
         personal.info.setPrefSize(100,20);
         personal.address.setPrefSize(200,20);
