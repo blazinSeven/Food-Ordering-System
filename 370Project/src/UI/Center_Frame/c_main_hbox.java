@@ -105,7 +105,7 @@ public class c_main_hbox extends HBox {
                 if (event.getCode()==KeyCode.ENTER) {
                     searchRestaurants.SearchRestaurant(search_field.getText());
                     if (searchRestaurants.message.equals("Found")){
-                        setsearch(searchRestaurants.k);
+                        setsearch(searchRestaurants.restaurant_id);
                     }
                 }
             }
@@ -113,7 +113,7 @@ public class c_main_hbox extends HBox {
         search.setOnAction(e->{
             searchRestaurants.SearchRestaurant(search_field.getText());
             if (searchRestaurants.message.equals("Found")){
-                setsearch(searchRestaurants.k);
+                setsearch(searchRestaurants.restaurant_id);
             }
         });
 

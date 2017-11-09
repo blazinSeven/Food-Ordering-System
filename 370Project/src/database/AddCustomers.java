@@ -26,7 +26,6 @@ public class AddCustomers {
      * String message for public
      */
     public String message = null;
-<<<<<<< HEAD
 
     /**
      * The function to add an customer's information to the database
@@ -36,9 +35,7 @@ public class AddCustomers {
      * @param eMail
      * @param prefFood
      */
-=======
     public int userId =1024;
->>>>>>> a6e67950c467d0c35a3c17854f70d7f72511b354
     public void setCustomerInfo(String firstName, String lastName, String phoneNum, String eMail, String prefFood)
     {
         /**
