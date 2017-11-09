@@ -1,5 +1,7 @@
 package UI.Checkout;
-
+/**
+ * Create By Hao Li at Nov. 7th
+ */
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +17,8 @@ public class Orders {
     Payment_type payment_type = new Payment_type();
     Stage go_orders = new Stage();
     public Button checkout = new Button("CHECK OUT");
+    
+    //example stacks
     Stack<Label> ii;
     Stack<Label> tt;
 
@@ -38,18 +42,14 @@ public class Orders {
         orderPane.setCenter(place_order.center_view());
         orderPane.setBottom(place_order.bottom_buttons());
         /*set listeners*/
-
-
-
-
-        //for place orders
+        //for place orders listeners
         place_order.quit.setOnAction(e->go_orders.close());
         place_order.p_order.setOnAction(e->{
             orderPane.setCenter(payment_type.payment());
             orderPane.setBottom(null);
 
         });
-        //for payment_type
+        //for payment_type listeners
         payment_type.p_now.setOnAction(e->{
             if (payment_type.cash.isSelected()||payment_type.debit.isSelected()||payment_type.credit.isSelected()){
                 payment_type.credit.setSelected(false);
@@ -135,7 +135,11 @@ public class Orders {
         go_orders.setScene(scene);
         go_orders.show();
     }
-
+    
+    
+    /**
+     Example code for how to change and use update listviews, need to replace by real data from data base
+     **/
     Stack setIi(){
         ii = new Stack<>();
         for (int i = 0; i< 10; i++){
