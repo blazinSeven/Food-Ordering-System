@@ -12,7 +12,7 @@ public class GoConnection {
     /**
      * connection
      */
-    Connection coon = null;
+    public Connection coon = null;
 
     /**
      * username and password filed

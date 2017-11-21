@@ -4,7 +4,7 @@ import java.util.Date;
 /**
  * Created by Kocur on 2017-10-10.
  */
-public class credit {
+public class Credit {
 
     private int number;
     private int cvs;
@@ -15,7 +15,7 @@ public class credit {
     /*
         Creator Method. In order pass card num, cvs, card type, expiration date and starting date
      */
-    credit(int num, int code, String type, Date expiry, Date startDate)
+    Credit(int num, int code, String type, Date expiry, Date startDate)
     {
         this.number = num;
         this.cvs = code;
@@ -28,7 +28,7 @@ public class credit {
         IN: Credit Card
         OUT: Returns true if the expiration date is after the "validFrom" date
      */
-    public boolean isDateValid(credit c)
+    public boolean isDateValid(Credit c)
     {
         if(c.validFrom.compareTo(c.goodThru) <= 0)
         {
@@ -48,7 +48,7 @@ public class credit {
 
      Date testDate1 = new Date (1994, 3, 8 );
      Date testDate2 = new Date (1994, 3, 9);
-     credit testCard = new credit(123, 123, "Visa", testDate2, testDate2);
+     Credit testCard = new Credit(123, 123, "Visa", testDate2, testDate2);
 
 
      try {

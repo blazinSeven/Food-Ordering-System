@@ -3,6 +3,9 @@ package Payment;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -15,28 +18,24 @@ public class DateVerification {
     /**
      * Current date of day the program is being ran
      */
-    private Date todaydate;
+    private LocalDate todaydate;
 
     /**
      * Users Credit Card expiry date
      */
-    private Date userDate;
+    private LocalDate userDate;
 
 
     /**
      * Initialize the Credit Card expiry date with the expire date entered by the user
      * @param expiry  The expiry date entered by the user
      */
-    DateVerification(String expiry){
+    public DateVerification(String expiry){
 
-        this.todaydate = new Date();
+        this.todaydate = LocalDate.now();
+        this.userDate = LocalDate.parse(expiry,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-        try{
-            this.userDate = new SimpleDateFormat("MMyy").parse(expiry);
-        }
-        catch (ParseException e) {
-            System.out.println("EXPIRY DATE ENTERED IS EITHER INVALID OR WRONG FORMAT");
-        }
+
 
     }
 
@@ -47,7 +46,7 @@ public class DateVerification {
      */
     public boolean isDateValid(){
 
-        if(userDate.before(todaydate)){
+        if(userDate.isBefore(todaydate)){
 
             throw new RuntimeException("CREDIT CARD HAS EXPIRED!!!");
         }

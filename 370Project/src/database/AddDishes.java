@@ -23,13 +23,14 @@ public class AddDishes {
      }
 
      **/
-    public void setDishInfo(int menus_id, String dish_name, float dishe_price, float pptime ) {
+
+    public void setDishInfo(int menus_id, String dish_name, float dish_price) {
         connection.connect();
         if (connection.coon != null)
         {
             try {
                 //These lines setup SQL queries & check handle problematic cases using SQL API
-                String addQuery = "insert into dishes (menus_id, dish_name, dish_prices, dish_preparation_time) values (?,?,?,?)";
+                String addQuery = "insert into dishes (menus_id, dish_name, dish_prices) values (?,?,?)";
                 String getUserId = "select menu_id from menus where menu_id = ?";
                 PreparedStatement stmt1 = connection.coon.prepareStatement(getUserId);
                 stmt1.setInt(1,menus_id);
@@ -39,8 +40,7 @@ public class AddDishes {
                     PreparedStatement ppStmt = connection.coon.prepareStatement(addQuery);
                     ppStmt.setInt(1, menus_id);
                     ppStmt.setString(2, dish_name);
-                    ppStmt.setFloat(3, dishe_price);
-                    ppStmt.setFloat(4, pptime);
+                    ppStmt.setFloat(3, dish_price);
                     int affected = ppStmt.executeUpdate();
                     if (affected > 0) {
                         message = "The dish information has been saved!";
@@ -92,11 +92,9 @@ public class AddDishes {
         System.out.println("Enter the dish price: ");
         float price = in1.nextFloat();
 
-        System.out.println("Enter the dish pptime: ");
-        float pptime = in1.nextFloat();
 
         AddDishes addDishes = new AddDishes();
-        addDishes.setDishInfo(menu_id,name,price,pptime);
+        addDishes.setDishInfo(menu_id,name,price);
 
 
         //AddUser addDish = new AddUser();
