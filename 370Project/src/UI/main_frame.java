@@ -35,9 +35,10 @@ public class main_frame extends Application {
         logo.setFitWidth(160);
         user_account user_account = new user_account();
         //search search = new search();
-        sort sort = new sort();
-        count count = new count();
         c_main_hbox center = new c_main_hbox();
+        sort sort = new sort(center);
+        count count = new count();
+
 
 
 
@@ -54,6 +55,7 @@ public class main_frame extends Application {
         left.setPadding(new Insets(10,5,10,5));
         MainPane.setPrefHeight(500);
         MainPane.setPrefWidth(800);
+
 
         // add children
         left.getChildren().addAll(blank,user_account,center.search(),sort,count,orders.checkout(),center.main_Button());

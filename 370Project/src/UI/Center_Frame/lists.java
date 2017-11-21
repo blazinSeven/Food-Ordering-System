@@ -14,8 +14,13 @@ public class lists {
     Image k;
     Image[] restaurant = new Image[num_image];
     ImageView[]  res_image = new ImageView[restaurant.length];
+
+    /**
+     * Put the pictures in Image[] into ImageView[]
+     */
     public lists(){
         getRestaurant();
+        // Now Image[] is fulfilled with pictures
         for (Image aRestaurant : restaurant) {
             for (int n = 0; n < res_image.length; n++) {
                 if (res_image[n] == null) {
@@ -29,6 +34,12 @@ public class lists {
         }
     }
 
+
+
+    /**
+     * Put all the pictures from folder into Image[]
+     * where id = pic_id
+     */
     public void getRestaurant(){
 
         //if (id = pic_id)
@@ -43,6 +54,8 @@ public class lists {
             num_image--;
         }
     }
+
+
 
 
 
