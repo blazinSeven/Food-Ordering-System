@@ -2,6 +2,7 @@ package UI;
 
 import UI.Account.user_account;
 import UI.Center_Frame.c_main_hbox;
+import UI.Checkout.Orders;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
  * Create By Hao Li at Oct. 15th
@@ -20,7 +22,8 @@ public class main_frame extends Application {
     BorderPane MainPane = new BorderPane();
     VBox left = new VBox();
     StackPane blank = new StackPane();
-    Button checkout = new Button("CHECK OUT");
+
+    Orders orders = new Orders();
 
 
 
@@ -41,8 +44,7 @@ public class main_frame extends Application {
 
 
         // set up pane, scene and stage
-        checkout.setPrefSize(180,60);
-        checkout.getStylesheets().add("css/checkout.css");
+
         windows = primaryStage;
         left.setPrefHeight(400);
         left.setPrefWidth(180);
@@ -54,7 +56,7 @@ public class main_frame extends Application {
         MainPane.setPrefWidth(800);
 
         // add children
-        left.getChildren().addAll(blank,user_account,center.search(),sort,count,checkout,center.main_Button());
+        left.getChildren().addAll(blank,user_account,center.search(),sort,count,orders.checkout(),center.main_Button());
         MainPane.setLeft(left);
         MainPane.setCenter(center);
         Scene scene = new Scene(MainPane);
