@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 
 /**
- * This is a UI class to verify the validity of CVV code of the Credit Card
+ * This is a UI class to verify the validity of the Credit Card details
  * entered during payment.
  */
 public class CreditCardPayment extends Application {
