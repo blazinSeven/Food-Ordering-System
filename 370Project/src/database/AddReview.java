@@ -47,7 +47,7 @@ public class AddReview {
     public static void main(String arg[])
     {
         AddReview addReview = new AddReview();
-        addReview.setReviewInfo(1,7,3,3, "not good");
+        addReview.setReviewInfo(1,10,3,2, "gen");
         System.out.println(addReview.message);
     }
 

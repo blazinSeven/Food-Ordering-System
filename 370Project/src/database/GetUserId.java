@@ -1,6 +1,7 @@
 package database;
-
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+/**Create by Yinsheng Dong Nov 21
+ *
+ */
 
 import javax.management.Query;
 import java.sql.PreparedStatement;
