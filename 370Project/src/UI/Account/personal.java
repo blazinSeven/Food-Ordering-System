@@ -1,5 +1,6 @@
 package UI.Account;
 
+import database.ChangeUserPassword;
 import database.DisplayUserInformation;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,7 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 /**
  * Create By Hao Li at Oct. 18th
@@ -26,10 +31,17 @@ public class personal{
     private Button c_password = new Button("Change Password");
     private Button f_food = new Button("Favorite");
     private Button q = new Button("Log Out");
+    Button c_button = new Button("Submit");
+    PasswordField old_field = new PasswordField();
+    PasswordField nword_field = new PasswordField();
+    PasswordField confirm_field = new PasswordField();
     String u_name;
     String u_address;
     String u_email;
     String phone_num;
+    Label message = new Label();
+    int user_id;
+    ChangeUserPassword user_password = new ChangeUserPassword();
 
 
     //check for info & address listener
@@ -51,6 +63,34 @@ public class personal{
         });
         p_info.setOnAction(e->borderPane.setCenter(information(u_name, u_address, u_email, phone_num)));
         c_password.setOnAction(e->borderPane.setCenter(change_password()));
+
+
+        //set change password
+        c_button.setOnAction(e->{
+            if (nword_field.getText().equals(confirm_field.getText())&& nword_field.getText()!=null&&confirm_field.getText()!=null){
+                user_password.verifyPassword(user_id,old_field.getText());
+                if (Objects.equals(user_password.verifyMessage, "Y")){
+                    user_password.changePassword(user_id,nword_field.getText());
+                    old_field.clear();
+                    nword_field.clear();
+                    confirm_field.clear();
+                    message.setFont(new Font(18));
+                    message.setTextFill(Color.GREEN);
+                    message.setText("Password Changed");
+
+                }
+                else{
+                    message.setFont(new Font(18));
+                    message.setTextFill(Color.GREEN);
+                    message.setText("Old Password Incorrect");
+                }
+            }
+            else {
+                message.setFont(new Font(18));
+                message.setTextFill(Color.RED);
+                message.setText("Confirm & New password \nshould be match");
+            }
+        });
 
 
         // add make up
@@ -110,10 +150,10 @@ public class personal{
         /* hard code for information
           need change listener by database **/
         VBox vBox = new VBox();
-        Label n = new Label("Name: Eric");
-        Label ad = new Label("Address: 110 Science Place");
-        Label ph = new Label("Phone Number: (306)306-3066");
-        Label em = new Label("E-mail: hal333@gmail.com");
+        Label n = new Label("Name: "+u_name);
+        Label ad = new Label("Address: "+u_address);
+        Label ph = new Label("Phone Number: "+phone_num);
+        Label em = new Label("E-mail Address: "+u_email);
 
         //set up size
         n.setPrefSize(260,90);
@@ -139,10 +179,7 @@ public class personal{
         Label nword = new Label("New Password: ");
         Label confirm = new Label("Confirm Password: ");
         //Label blank = new Label("                                     ");
-        Button c_button = new Button("Submit");
-        PasswordField old_field = new PasswordField();
-        PasswordField nword_field = new PasswordField();
-        PasswordField confirm_field = new PasswordField();
+
 
         //set up size
         change.setPrefSize(400,400);
@@ -154,6 +191,7 @@ public class personal{
         change.add(confirm_field,1,2);
         //change.add(blank,0,3);
         change.add(c_button,1,3);
+        change.add(message,1,4);
 
         //set up padding
         change.setAlignment(Pos.CENTER_LEFT);
