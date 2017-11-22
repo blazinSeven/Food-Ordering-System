@@ -41,7 +41,7 @@ public class UpdateWaitingTime {
     public static void main(String arg[])
     {
         UpdateWaitingTime updateWaitingTime = new UpdateWaitingTime();
-        updateWaitingTime.UpdateWaitingTime(Time.valueOf("1:00:00"), 1);
+        updateWaitingTime.UpdateWaitingTime(Time.valueOf("00:08:00"), 7);
         System.out.println(updateWaitingTime.message);
     }
 

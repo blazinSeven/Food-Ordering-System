@@ -1,5 +1,8 @@
 package Search_Sort;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import database.GoConnection;
@@ -21,6 +24,7 @@ public class Sort {
     public ArrayList<Integer> rate = new ArrayList<>();
     public ArrayList<Long> waiting_time = new ArrayList<>();
     public ArrayList<ArrayList<String>> result = new ArrayList<>();
+
 
     /**
      * Sort the result by rate
@@ -116,8 +120,10 @@ public class Sort {
      *
      * @param search: result of search
      */
+
     public void SortByWaitingTime(String search, boolean SearchDish, ArrayList<ArrayList<String>> inputResult)
     {
+
         search = "%" + search.toLowerCase() + "%";
         k.clear();
         Query = null;
@@ -141,6 +147,8 @@ public class Sort {
     }
         //print();
     }
+
+
 
 
     // Following functions are helper functions
@@ -188,6 +196,8 @@ public class Sort {
 
     public static void main(String[] args)
     {
+
+
         Sort sr = new Sort();
 
         /*
@@ -198,13 +208,13 @@ public class Sort {
         sr.SortByDistance(" ");
         System.out.println("SortByRate");
         sr.SortByRate(" ");
-        */
+
         sr.SortByDistance("fries",new ArrayList<>(),1);
 
-
-
-
+*/
         //sr.SortByPrice("rie");
+
+        //System.out.println(sort.sortByWaitingTimeRestaurant);
 
     }
 
