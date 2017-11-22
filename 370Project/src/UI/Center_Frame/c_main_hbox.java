@@ -64,7 +64,6 @@ public class c_main_hbox extends HBox {
      * Following three functions are the three vertical lists appear at the right of the main_frame
      * @return
      */
-
     // main layout for restaurant name list
     private VBox res_name(){
         restaurant_list = new VBox();
@@ -72,9 +71,9 @@ public class c_main_hbox extends HBox {
         name.setPrefSize(260,30);
         name.setAlignment(Pos.CENTER);
         //name.setStyle("-fx-background-color: steelblue");
-       // restaurant_list.setStyle("-fx-background-color: brown");
+        // restaurant_list.setStyle("-fx-background-color: brown");
         restaurant_list.getChildren().add(name);
-        for (int i = page_number;i<res_lists.res_image.length;i++){
+        for (int i =page_number;i<res_lists.res_image.length;i++){
             if (res_lists.res_image[i]!=null&&restaurant_list.getChildren().size()<5){
                 restaurant_list.getChildren().add(res_lists.res_image[i]);
             }

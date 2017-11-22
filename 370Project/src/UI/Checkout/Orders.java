@@ -39,6 +39,8 @@ public class Orders {
     }
     public void orders(){
         BorderPane orderPane = new BorderPane();
+        orderPane.getStylesheets().add("css/order.css");
+        orderPane.setStyle("-fx-background-color: cornsilk");
         orderPane.setPrefSize(650,400);
         go_orders.setTitle("PLACE YOUR ORDER");
 
@@ -153,7 +155,7 @@ public class Orders {
     Stack setIi(){
         ii = new Stack<>();
         for (int i = 0; i< 10; i++){
-            Label temp = new Label("hahah"+i);
+            Label temp = new Label("Ordered Food "+i);
             temp.setPrefWidth(100);
             temp.setAlignment(Pos.CENTER);
             ii.push(temp);

@@ -49,6 +49,15 @@ public class listOfRestaurants {
 
                 lists[i] = Temp;
             }
+
+
+
+
+
+
+
+
+
             // Else, search by restaurant
         } else if (result.get(0).size() == 7 || result.get(0).size() == 5){
             for (int i = 0; i < result.size(); i++) {
@@ -99,8 +108,6 @@ public class listOfRestaurants {
 
             listOfAddress[i] = Temp;
         }
-
-
 
     }
 }

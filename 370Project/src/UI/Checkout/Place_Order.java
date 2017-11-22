@@ -31,6 +31,7 @@ public class Place_Order{
         // set sizes
         button_holder.setPrefSize(650,60);
         quit.setPrefSize(150,50);
+        quit.setStyle("-fx-background-color: RED");
         p_order.setPrefSize(150,50);
 
         //set Margin
