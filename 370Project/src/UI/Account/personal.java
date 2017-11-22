@@ -1,5 +1,6 @@
 package UI.Account;
 
+import database.DisplayUserInformation;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,6 +26,10 @@ public class personal{
     private Button c_password = new Button("Change Password");
     private Button f_food = new Button("Favorite");
     private Button q = new Button("Log Out");
+    String u_name;
+    String u_address;
+    String u_email;
+    String phone_num;
 
 
     //check for info & address listener
@@ -44,7 +49,7 @@ public class personal{
             address.setText("Signed Up");
             setCheck(true);
         });
-        p_info.setOnAction(e->borderPane.setCenter(information()));
+        p_info.setOnAction(e->borderPane.setCenter(information(u_name, u_address, u_email, phone_num)));
         c_password.setOnAction(e->borderPane.setCenter(change_password()));
 
 
@@ -100,8 +105,7 @@ public class personal{
 
 
     // personal information frame
-    VBox information(){
-
+    VBox information(String name, String address, String email, String phone_num){
         // creation
         /* hard code for information
           need change listener by database **/
