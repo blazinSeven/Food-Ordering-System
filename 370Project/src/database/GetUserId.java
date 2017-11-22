@@ -45,7 +45,7 @@ public class GetUserId {
     public static void main(String arg[])
     {
         GetUserId getUserId = new GetUserId();
-        getUserId.getUserId("ayden","12345");
+        getUserId.getUserId("h","h");
         System.out.println(getUserId.message);
     }
 }

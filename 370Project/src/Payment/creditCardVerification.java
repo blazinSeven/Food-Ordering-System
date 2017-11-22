@@ -1,114 +1,231 @@
-package Payment; /**
+package Payment;
+/**
  * Created by ror716 on 2017-10-11.
  */
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.text.DateFormat;
 
 /**
- * Created by Kocur on 2017-10-10.
+ * This is a class to verify the validity of Expiry Date of the Credit Card
+ * entered during payment.
  */
 public class CreditCardVerification {
 
+    /**
+     * User's Credit Card number
+     */
     private String ccNumber;
-    private String CCV;
-    private String cardType;
-    private LocalDate goodThru;
-    private LocalDate validFrom;
-    public int STD_CCN_DIGITS = 16;
-    public int STD_CCV_DIGITS = 3;
 
-    /*
-        Creator Method. In order pass card num, cvs, card type, expiration date and starting date
+    /**
+     * Standard Credit Card number length
      */
-    public CreditCardVerification(String num, String code, String type, LocalDate expiry, LocalDate startDate)
-    {
-        this.ccNumber = num;
-        this.CCV = code;
-        this.cardType = type;
-        this.goodThru = expiry;
-        this.validFrom = startDate;
+    public int stdCCNumberDigit = 16;
+
+    /**
+     * Current date of day the program is being ran
+     */
+    private Date todayDate;
+
+    /**
+     * Users Credit Card expiry date
+     */
+    private Date userDate;
+
+    /**
+     * Standard date format
+     */
+    DateFormat dateFormat;
+
+    /**
+     * User's Credit Card CVV code
+     */
+    private String CVV;
+
+    /**
+     * Standard CVV code length
+     */
+    public int stdCVVDigits = 3;
+
+    /**
+     * A string that carries all exception messages
+     */
+    public String message ="";
+
+    /**
+     * This is a class that verifies the validity of the credit card details entered for payment
+     * by the user
+     * @param number The Credit Card number entered by user
+     * @param expiry The expiry date entered by the user
+     * @param code The CVV code entered by user
+     */
+    public CreditCardVerification(String number, String expiry, String code){
+
+        this.ccNumber = number;
+
+        this.CVV = code;
+
+        this.todayDate = new Date();
+
+        this.dateFormat  = new SimpleDateFormat("MMyy");
+
+        try{
+            this.userDate = new SimpleDateFormat("MMyy").parse(expiry);
+        }
+        catch (ParseException e) {
+            message = "EXPIRY DATE ENTERED IS EITHER INVALID OR WRONG FORMAT";
+        }
+
     }
 
     /**
-     IN: Credit Card
-     OUT: Returns true if the expiration date is after the "validFrom" date
+     * Checks the validity of the entered Credit Card number using the length of numbers entered
+     * @param C Credit Card details entered by user
+     * @return true if the Credit Card number entered is exactly 16 digits
      */
-    public boolean isDateValid(CreditCardVerification c)
-    {
-        if(c.validFrom.compareTo(c.goodThru) <= 0)
-        {
-            throw new  RuntimeException("Error:  Credit Card expiration date is invalid");
+    public boolean isCCNumberLengthValid(CreditCardVerification C){
+
+        try {
+
+            if (C.ccNumber.length() < stdCCNumberDigit)
+                throw new RuntimeException();
+
+
+            if (C.ccNumber.length() > stdCCNumberDigit)
+                throw new RuntimeException();
         }
-        else
-        {
-            return true;
+
+        catch(RuntimeException e) {
+
+            message = "Error: CREDITCARD NUMBER ENTERED IS INVALID";
         }
+
+        return  true;
+
     }
 
 
     /**
-     * Test the validity of the entered CreditCardVerification card number using the length of numbers entered
-     * @param c
-     * @return true is the CreditCardVerification card number entered is exactly 16 digits
+     * Checks the validity of the entered Credit Card number by checking if the numbers are actual integers
+     * @param C Credit Card details entered by user
+     * @return true if the Credit Card number entered are actual integers
      */
+    public boolean isCCNumberValid(CreditCardVerification C){
 
-    public boolean isCCNumberValid(CreditCardVerification c){
+        try{
 
-        if(c.ccNumber.length() < STD_CCN_DIGITS){
-            throw new RuntimeException("Error: CreditCard Number is INVALID, MotherFucker!!!");
+            Long.parseLong(C.ccNumber);
         }
 
-        else if(c.ccNumber.length() > STD_CCN_DIGITS){
-            throw new RuntimeException("Error: CreditCard Number is INVALID, MotherFucker!!!");
+        catch(NumberFormatException e){
+
+            message = "Error: CREDITCARD NUMBER ENTERED IS INVALID";
         }
 
-        else {
-            return  true;
-        }
+        return true;
     }
 
     /**
-     * Test the validity of the entered CreditCardVerification card verification number using the length of numbers entered
-     * @param c
-     * @return true is the CreditCardVerification card verification number entered is exactly 3 digits
+     * Checks the validity of the expiry date entered by the user by checking if
+     * it is after the current date.
+     * @return true if the expiry date entered by the user is after the current date
      */
-    public boolean isCCVNumberValid(CreditCardVerification c){
+    public boolean isDateValid(){
 
-        if(c.CCV.length() < STD_CCV_DIGITS){
-            throw new RuntimeException("Error: CCV Number is INVALID, MotherFucker!!!");
+        try {
+
+            if (todayDate.after(userDate))
+                throw new RuntimeException();
+        }
+        catch (RuntimeException e){
+
+            message = "Error: EXPIRY DATE ENTERED IS INVALID";
         }
 
-        else if(c.CCV.length() > STD_CCV_DIGITS){
-            throw new RuntimeException("Error: CCV Number is INVALID, MotherFucker!!!");
-        }
-
-        else {
-            return  true;
-        }
+        return true;
     }
 
+    /**
+     * Checks the validity of the entered CVV number using the length of numbers entered
+     * @param C Credit Card details entered by user
+     * @return true is the creditCardVerification card verification number entered is exactly 3 digits
+     */
+    public boolean isCVVLengthValid(CreditCardVerification C){
 
+        try {
+
+            if (C.CVV.length() < stdCVVDigits)
+                throw new RuntimeException();
+
+
+            if (C.CVV.length() > stdCVVDigits)
+                throw new RuntimeException();
+        }
+
+        catch(RuntimeException e) {
+
+            message = "Error: CVV ENTERED IS INVALID";
+
+        }
+
+        return  true;
+
+    }
+
+    /**
+     * Checks the validity of the entered CVV number using the length of numbers entered
+     * @param C Credit Card details entered by user
+     * @return true is the creditCardVerification card verification number entered is exactly 3 digits
+     */
+    public boolean isCVVNumberValid(CreditCardVerification C){
+
+        try{
+
+            Integer.parseInt(C.CVV);
+        }
+
+        catch(NumberFormatException e){
+
+            message = "Error: CVV ENTERED IS INVALID";
+        }
+
+        return true;
+    }
+
+    /**
+     * Does all the Credit Card validation checks
+     * @param C Credit Card details entered by user
+     * @return
+     */
+    public boolean wasSuccessful(CreditCardVerification C){
+        try {
+            C.isCCNumberLengthValid(C);
+            C.isCVVNumberValid(C);
+            C.isCCNumberValid(C);
+            C.isCVVLengthValid(C);
+            C.isDateValid();
+        }
+
+        catch(RuntimeException e) {
+
+        }
+        return  true;
+    }
+
+    /**
+     * A method to test the class
+     */
     public static void main(String[] args)
     {
+        CreditCardVerification CCard = new CreditCardVerification("1234123412341234", "0218","123");
 
-        LocalDate testDate1 = LocalDate.parse ("1994/03/08", DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        LocalDate testDate2 = LocalDate.parse ("1994/03/09", DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        try {
+            CCard.wasSuccessful(CCard);
+        }
+        catch (RuntimeException e){
 
-        CreditCardVerification testCard = new CreditCardVerification("1234567890123456", "123","Visa", testDate1, testDate2);
+        }
 
-        /**
-         * Testing date functions
-         */
-        testCard.isDateValid(testCard);
-
-        // Testing Validity of the Credit Card Number
-        testCard.isCCNumberValid(testCard);
-
-        // Testing Validity of the Credit Card Verification Number
-        testCard.isCCVNumberValid(testCard);
     }
-
-
-
 }

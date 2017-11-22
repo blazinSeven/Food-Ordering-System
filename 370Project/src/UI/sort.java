@@ -40,53 +40,6 @@ public class sort extends VBox{
         sort4.setSelected(false);
 
 
-
-        /**
-        sort1.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                sort2.setSelected(false);
-                sort3.setSelected(false);
-                sort4.setSelected(false);
-                st.SortByRate(str);
-                centre.setSort(st.k);
-            }
-        });
-
-
-        sort2.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                sort1.setSelected(false);
-                sort3.setSelected(false);
-                sort4.setSelected(false);
-                //st.SortByDistance(str);
-                //centre.setSort(st.k);
-            }
-        });
-        sort3.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                sort2.setSelected(false);
-                sort1.setSelected(false);
-                sort4.setSelected(false);
-                //st.SortByPrice(str);
-                //centre.setSort(st.k);
-            }
-        });
-        sort4.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                sort2.setSelected(false);
-                sort3.setSelected(false);
-                sort1.setSelected(false);
-               // st.SortByWaitingTime(str);
-               // centre.setSort(st.k);
-            }
-        });
-
-        */
-
         /**
          * Set actions for those ratio button
          * For each button there is a different action, will call different function
@@ -131,7 +84,7 @@ public class sort extends VBox{
             sort4.setSelected(false);
             centre.page_number = 0;
             // If start new search
-            if (centre.SearchDishBoolean == false && centre.SearchRestaurantBoolean == false ){
+            if (!centre.SearchDishBoolean && !centre.SearchRestaurantBoolean){
                 // sort
                 st.SortByDistance(centre.search_field.getText(),centre.searchDishResult,1);
                 // Change the main frame

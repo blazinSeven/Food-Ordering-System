@@ -1,5 +1,7 @@
 package UI.Account;
 
+import database.DisplayUserInformation;
+import database.GetUserId;
 import database.Login;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -24,6 +26,8 @@ class Signed_In {
     private Stage windows = new Stage();
     private Registration registration = new Registration();
     personal personal = new personal();
+    GetUserId u_id = new GetUserId();
+    DisplayUserInformation d_u = new DisplayUserInformation();
 
     // access
     Signed_In(){
@@ -35,6 +39,7 @@ class Signed_In {
         personal.address.setPrefSize(200,20);
         // call listener
         setinfo();
+
     }
 
     // info & address listeners. To change the text and function
@@ -97,8 +102,15 @@ class Signed_In {
             if(login.message.equals("true"))
             {
                 //pop();
+                u_id.getUserId(username.getText(),password.getText());
+                personal.user_id = u_id.user_id;
+                d_u.getCustomerInfo(u_id.user_id);
+                personal.u_name = d_u.customer_last_name+" "+d_u.customer_first_name;
+                personal.u_address=d_u.customer_location;
+                personal.u_email = d_u.customer_email;
+                personal.phone_num = d_u.customer_phone_num;
                 personal.info.setText("Hi, "+login.name);
-                personal.address.setText("Address: 110 Science Place");
+                personal.address.setText(d_u.customer_location);
                 personal.setCheck(false);
                 setinfo();
                 windows.close();
