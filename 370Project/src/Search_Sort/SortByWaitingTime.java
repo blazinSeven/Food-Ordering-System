@@ -1,22 +1,18 @@
 package Search_Sort;
 
 import database.GoConnection;
-<<<<<<< HEAD
 import javafx.scene.control.Label;
-=======
->>>>>>> b96e74fe39ae0d25d8fe58db20868e85678f4637
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-=======
 /**
  * Yinsheng Dong Nov 21
  */
->>>>>>> b96e74fe39ae0d25d8fe58db20868e85678f4637
+
 public class SortByWaitingTime {
     public ArrayList<String> sortByWaitingTimeRestaurantName;
     public ArrayList<Integer> sortByWaitingTimeRestId;
@@ -73,20 +69,20 @@ public class SortByWaitingTime {
         sortByWaitingTime.sortByWaitingTime();
         System.out.println(sortByWaitingTime.sortByWaitingTimeRestId);
         System.out.println(sortByWaitingTime.sortByWaitingTimeRestaurantName);
-<<<<<<< HEAD
+
         /**
         System.out.println(sortByWaitingTime.sortByWaitingTimeRestaurantName);
         System.out.println(sortByWaitingTime.sortByWaitingTimeAddress);
         System.out.println(sortByWaitingTime.sortByWaitingTimeRate);
         System.out.println(sortByWaitingTime.message);
 **/
-    }
 
-=======
+
+
         System.out.println(sortByWaitingTime.sortByWaitingTimeAddress);
         System.out.println(sortByWaitingTime.sortByWaitingTimeRate);
         System.out.println(sortByWaitingTime.message);
 
     }
->>>>>>> b96e74fe39ae0d25d8fe58db20868e85678f4637
+
 }

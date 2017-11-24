@@ -13,7 +13,7 @@ import java.util.Calendar;
 
 import Payment.*;
 import org.joda.time.DateTime;
-
+/**
 public class AddCreditCardPaymentMethod {
 
     private GoConnection connection = new GoConnection();
@@ -112,4 +112,7 @@ public class AddCreditCardPaymentMethod {
 
         System.out.println(date.toString());
     }
+
+    }
 }
+**/
