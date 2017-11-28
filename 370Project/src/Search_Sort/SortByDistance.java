@@ -1,5 +1,9 @@
 package Search_Sort;
 
+/**
+ * Create By Hao Li at Nov.27th
+ */
+
 import database.GoConnection;
 import database.NearbyRestaurant;
 import google.GetDistance;

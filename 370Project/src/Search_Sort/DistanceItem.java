@@ -1,5 +1,9 @@
 package Search_Sort;
 
+/**
+ * Create By Hao Li at Nov.26th
+ */
+
 public class DistanceItem {
     int id;
     float length;

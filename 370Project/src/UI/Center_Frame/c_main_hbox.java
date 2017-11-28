@@ -1,7 +1,6 @@
 package UI.Center_Frame;
 
 import Search_Sort.*;
-import UI.Account.userId;
 import database.SearchRestaurants;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,13 +16,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**
  * Create By Hao Li at Oct. 22th
  * Modified by Yuecheng Rong
+ * Refactor By Hao Li at Nov.28th
  */
 
 public class c_main_hbox extends HBox {
@@ -34,8 +32,8 @@ public class c_main_hbox extends HBox {
     public TextField search_field = new TextField();
     // Label blank = new Label("                           ");
     //Button searchDish = new Button("Dish");
-    Button searchRestaurant = new Button("Restaura");
-    Button reset = new Button("New");
+    Button search = new Button("SEARCH");
+    Button reset = new Button("RESET");
 
     CheckBox s_w = new CheckBox();
     CheckBox s_a = new CheckBox();
@@ -168,7 +166,7 @@ public class c_main_hbox extends HBox {
                 }
             }
         });
-        searchRestaurant.setOnAction(e->{
+        search.setOnAction(e->{
             if(!search_field.getText().isEmpty()){
                 sr.SearchRestaurant(search_field.getText().toUpperCase());
                 if (sr.message.equals("Found")){
@@ -184,7 +182,8 @@ public class c_main_hbox extends HBox {
 
         });
         //reset.setPrefWidth(100);
-        holder.getChildren().addAll(reset,searchRestaurant);
+        Label blank = new Label("           ");
+        holder.getChildren().addAll(reset, blank,search);
         return holder;
     }
 

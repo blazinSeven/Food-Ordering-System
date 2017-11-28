@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 /**
  * This is a UI class to verify the validity of the Credit Card details
  * entered during payment.
+ * Refactor By Hao Li at Nov.27th
  */
 
 public class CreditCardPayment {
