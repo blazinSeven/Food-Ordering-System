@@ -215,20 +215,6 @@ public class c_main_hbox extends HBox {
             if (page_number>=4){
                 page_number=page_number-4;
                 setLists();
-                /**
-                // start/reset
-                if (execute == 0){
-                    setLists();
-                } else if (execute == 1){
-                    setSort(n);
-                    setRate(rate,waiting_time);
-                } else if (execute == 2){
-                    setSortBySuperArray(result);
-                    setRateSuper(result);
-                } else if (execute == 3){
-                    setSortByDistace(result);
-                }
-                 **/
             }
             else {
                 System.out.println("pre");
@@ -238,20 +224,6 @@ public class c_main_hbox extends HBox {
             if (page_number<8){
                 page_number=page_number+4;
                 setLists();
-                /**
-                if (execute == 0){
-
-                } else if (execute == 1){
-                    setSort(n);
-                    setRate(rate,waiting_time);
-                } else if (execute == 2){
-                    setSortBySuperArray(result);
-                    setRateSuper(result);
-                }
-                else if (execute == 3){
-                    setSortByDistace(result);
-                }
-**/
             }
             else {
                 System.out.println("next");
@@ -296,6 +268,11 @@ public class c_main_hbox extends HBox {
         s_d.setText("Sort By Distance");
         s_p.setText("Sort By Price");
         s_w.setText("Sort By Waiting Time");
+        s_a.getStylesheets().add("css/checkbox.css");
+        s_w.getStylesheets().add("css/checkbox.css");
+        s_d.getStylesheets().add("css/checkbox.css");
+        s_p.getStylesheets().add("css/checkbox.css");
+
         s_w.setOnAction(e->{
             if (s_w.isSelected()) {
                 s_a.setSelected(false);
@@ -331,7 +308,7 @@ public class c_main_hbox extends HBox {
                 s_w.setSelected(false);
                 s_p.setSelected(false);
                 s_a.setSelected(false);
-                SortByDistance sbd = new SortByDistance(1);
+                SortByDistance sbd = new SortByDistance(19);
                 res_lists.getaddress(sbd.sortByDistanceAddress);
                 res_lists.getRate(sbd.sortByDistanceRate);
                 res_lists.getRestaurant(sbd.sortByDistanceId);

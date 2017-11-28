@@ -113,6 +113,9 @@ public class SortByDistanceWithLogin {
     public static void main(String arg[])
     {
         SortByDistanceWithLogin sortByDistance = new SortByDistanceWithLogin(19);
-        System.out.println(sortByDistance.getDistanceSort());
+        //System.out.println(sortByDistance.getDistanceSort().get(1).getRest_id());
+        for (int i=0;i<sortByDistance.getDistanceSort().size();i++){
+            System.out.println(sortByDistance.getDistanceSort().get(i).getRest_id());
+        }
     }
 }

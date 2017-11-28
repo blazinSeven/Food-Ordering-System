@@ -128,7 +128,7 @@ public class SortByDistance {
 
     public static void main(String arg[])
     {
-        SortByDistance sortByDistance = new SortByDistance(1);
+        SortByDistance sortByDistance = new SortByDistance(19);
         System.out.println(sortByDistance.sortByDistanceId.size());
         for (int i=0;i<sortByDistance.sortByDistanceId.size();i++){
             System.out.println(sortByDistance.sortByDistanceId.get(i));
