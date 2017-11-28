@@ -1,5 +1,6 @@
 package UI.Center_Frame;
 
+import Search_Sort.SortByOrdering;
 import Search_Sort.SortByWaitingTime;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -23,7 +24,8 @@ public class lists {
     ImageView[]  res_image;
     Label[] Address;
     Label[] Rate;
-    SortByWaitingTime sbt = new SortByWaitingTime();
+    int[] r_id;
+    SortByOrdering sbt = new SortByOrdering();
 
 
 
@@ -32,10 +34,10 @@ public class lists {
      */
     public lists(){
         sbt.sortByWaitingTime();
-        index = sbt.sortByWaitingTimeRestId.size();
-        getRestaurant(sbt.sortByWaitingTimeRestId);
-        getaddress(sbt.sortByWaitingTimeAddress);
-        getRate(sbt.sortByWaitingTimeRate);
+        index = sbt.sortByOrderingRestId.size();
+        getRestaurant(sbt.sortByOrderingRestId);
+        getaddress(sbt.sortByOrderingAddress);
+        getRate(sbt.sortByOrderingRate);
 
     }
 
@@ -45,12 +47,15 @@ public class lists {
      * Put all the pictures from folder into Image[]
      * where id = pic_id
      */
-    public void getRestaurant(ArrayList res){
+    public void getRestaurant(ArrayList<Integer> res){
+
         restaurant  = new Image[index];
         res_image = new ImageView[restaurant.length];
+        r_id = new int[restaurant.length];
         int temp_r = index;
         while (temp_r !=0){
             for (int i = 0; i < res.size();i++){
+                r_id[i] = res.get(i);
                 if (restaurant[i]==null){
                     k = new Image("/restaurant_pic/"+res.get(i)+".jpg");
                     restaurant[i] = k;

@@ -2,6 +2,7 @@ package UI.Center_Frame;
 
 import Search_Sort.*;
 import UI.Account.userId;
+import database.SearchRestaurants;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,11 +10,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Create By Hao Li at Oct. 22th
@@ -23,6 +29,7 @@ import java.util.ArrayList;
 public class c_main_hbox extends HBox {
     SortByWaitingTime sbt = new SortByWaitingTime();
     SortByRating sbr = new SortByRating();
+    SearchRestaurants sr = new SearchRestaurants();
     // for search use
     public TextField search_field = new TextField();
     // Label blank = new Label("                           ");
@@ -51,11 +58,8 @@ public class c_main_hbox extends HBox {
     VBox address_list;
     public int page_number = 0;
 
-    // These nodes will be called by other classes
-    public ArrayList<ArrayList<String>> searchDishResult = new ArrayList<>();
-    public ArrayList<ArrayList<String>> searchRestaurantResult = new ArrayList<>();
-    public boolean SearchRestaurantBoolean = false;
-    public boolean SearchDishBoolean = false;
+
+
 
     // main accessing for all main list
     public c_main_hbox(){
@@ -154,35 +158,30 @@ public class c_main_hbox extends HBox {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode()==KeyCode.ENTER) {
-                    // For simplicity, we assume the user logged in is user_id 1
+                    if(!search_field.getText().isEmpty()){
+                        sr.SearchRestaurant(search_field.getText().toUpperCase());
+                        if (sr.message.equals("Found")){
+                            setsearch(sr.res_id,sr.res_address,sr.rate);
+                        }
+                    }
 
-                    // tell others that now the customer is searching restaurants
-                    SearchDishBoolean = false;
-                    SearchRestaurantBoolean = true;
                 }
             }
         });
         searchRestaurant.setOnAction(e->{
-            // For simplicity, we assume the user logged in is user_id 1
-
-            // Change the appearance of the middle frame
-
-            // tell others that now the customer is searching restaurants
-            SearchDishBoolean = false;
-            SearchRestaurantBoolean = true;
+            if(!search_field.getText().isEmpty()){
+                sr.SearchRestaurant(search_field.getText().toUpperCase());
+                if (sr.message.equals("Found")){
+                    setsearch(sr.res_id,sr.res_address,sr.rate);
+                }
+            }
         });
         reset.setOnAction(e->{
-            setLists();
-            // Clear Rate and Address
-            searchRestaurantResult.clear();
-            searchDishResult.clear();
             search_field.clear();
             rate_list.getChildren().clear();
             address_list.getChildren().clear();
-            set_button(0, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-            // tell others that now the customer is starting new search
-            SearchDishBoolean = false;
-            SearchRestaurantBoolean = false;
+            setLists();
+
         });
         //reset.setPrefWidth(100);
         holder.getChildren().addAll(reset,searchRestaurant);
@@ -201,13 +200,12 @@ public class c_main_hbox extends HBox {
     public HBox main_Button(){
         HBox button_box = new HBox();
         button_box.getStylesheets().add("css/page.css");
-        set_button(0, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        set_button();
         button_box.getChildren().addAll(pre,next);
         return button_box;
     }
     // Edited: input has been changed
-    public void set_button(int execute, ArrayList<Integer> n, ArrayList<Integer> rate, ArrayList<Long> waiting_time,
-                           ArrayList<ArrayList<String>> result){
+    public void set_button(){
 
         pre.setPrefSize(90,30);
         next.setPrefSize(90,30);
@@ -253,7 +251,7 @@ public class c_main_hbox extends HBox {
                 address_list.getChildren().add(res_lists.Address[i]);
             }
         }
-        rate_list.getChildren().addAll(rate);
+        rate_list.getChildren().add(rate);
         for (int i=page_number;i<res_lists.Rate.length;i++){
             if (res_lists.Rate[i]!=null && rate_list.getChildren().size()<5){
                 rate_list.getChildren().add(res_lists.Rate[i]);
@@ -326,7 +324,36 @@ public class c_main_hbox extends HBox {
         return sort_hold;
     }
 
+    public void setsearch(int n,String add, float s_rate){
+        Label temp_add = new Label();
+        Label temp_rate = new Label();
+        for (int i=0;i<res_lists.Rate.length;i++){
+            if (Objects.equals(res_lists.Rate[i].getText(), ""+s_rate)){
+                temp_rate = res_lists.Rate[i];
+            }
+        }
+        for (int i=0;i<res_lists.Address.length;i++){
+            if (Objects.equals(res_lists.Address[i].getText(), add)){
+                temp_add = res_lists.Address[i];
+            }
+        }
 
+        ImageView temp_res = new ImageView(new Image("/restaurant_pic/"+n+".jpg"));
+        temp_res.setFitWidth(260);
+        temp_res.setFitHeight(110);
+
+        restaurant_list.getChildren().clear();
+        rate_list.getChildren().clear();
+        address_list.getChildren().clear();
+
+        restaurant_list.getChildren().add(name);
+        address_list.getChildren().add(address);
+        rate_list.getChildren().add(rate);
+
+        restaurant_list.getChildren().add(temp_res);
+        address_list.getChildren().add(temp_add);
+        rate_list.getChildren().add(temp_rate);
+    }
 
 
 }
