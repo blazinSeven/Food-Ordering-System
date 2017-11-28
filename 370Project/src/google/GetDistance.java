@@ -8,6 +8,7 @@ import com.google.maps.model.Distance;
 import com.google.maps.model.DistanceMatrix;
 import sun.misc.FloatingDecimal;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -32,16 +33,15 @@ public class GetDistance {
     public String getDistanceString(String origin, String destination) {
 
         if (context != null) {
-            System.out.println("Connect");
+            //System.out.println("Connect");
             String [] orig = {origin};
             String [] dest = {destination};
             DirectionsResult result = DirectionsApi.getDirections(context, orig[0], dest[0]).awaitIgnoreError();
             Distance distance = new Distance();
-            distance.getClass().getResource(result.routes.clone().toString());
+            distance.getClass().getResource(Arrays.toString(result.routes.clone()));
             DistanceMatrix distanceMatrix = DistanceMatrixApi.getDistanceMatrix(context, orig, dest).awaitIgnoreError();
             getDistance = distanceMatrix.rows[0].elements[0].distance.humanReadable;
             //distanceFloat = Float.valueOf(distanceMatrix.rows[0].elements[0].distance.humanReadable.toString());
-
         }
         return getDistance;
 
@@ -49,7 +49,7 @@ public class GetDistance {
 
     /**
      * getFloatDistance function so will get the float of distance between origin and destination
-     * @param orign, destiantion
+     * @param origin, destination
      * @return a float
      */
     public float getFloatDistance(String origin, String destination)
@@ -80,6 +80,10 @@ public class GetDistance {
         System.out.println("Please enter the final destination:  \n");
         String destination = in.nextLine();
         GetDistance getDistance = new GetDistance();;
+        getDistance.getDistanceString(origin,destination);
+        System.out.println(getDistance.toString());
+        getDistance.getFloatDistance(origin,destination);
+        System.out.println(getDistance.toString());
         //Test with string
         //System.out.println(getDistance.getDistance);
         //Float getDistanceNum = Float.valueOf(getDistance.getDistance);

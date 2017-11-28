@@ -21,7 +21,7 @@ public class NearbyRestaurant {
     /**
      * This 2-d array for storing the restaurant name we've found, and address for each restaurant
      */
-    ArrayList<ArrayList<String>> addressArray = new ArrayList<>();
+    public ArrayList<ArrayList<String>> addressArray = new ArrayList<>();
     /**
      * customerAddress
      */
@@ -42,11 +42,11 @@ public class NearbyRestaurant {
      * and store the restaurant we found into the 2-d array
      * @param customer_id
      */
-    private void findRestaurantSameCity(int customer_id)
+    public void findRestaurantSameCity(int customer_id)
     {
         // connection
         connection.connect();
-        GetDistance getDistance = new GetDistance();
+        //GetDistance getDistance = new GetDistance();
 
         if(connection.coon!=null)
         {
@@ -61,7 +61,7 @@ public class NearbyRestaurant {
 
                     // after we got the user_id, we need to get the city, province of that customer
                     int userId = resultSet.getInt("user_id");
-                    System.out.println(userId);
+                    //System.out.println(userId);
                     String checkUserInfoQuery = "select l.city, l.province from locations l where l.user_id = ? ";
                     PreparedStatement checkUserInfoStmt = connection.coon.prepareStatement(checkUserInfoQuery);
                     checkUserInfoStmt.setInt(1,userId);
@@ -87,7 +87,7 @@ public class NearbyRestaurant {
                         while(getRestaurant.next())
                         {
                             // the is for getting restaurant name query, then simply run it in sql
-                            System.out.println(getRestaurant.getInt("user_id"));
+                            //System.out.println(getRestaurant.getInt("user_id"));
                             String getRestNameQuery = "select * from restaurants where user_id = ?";
                             PreparedStatement restStmt = connection.coon.prepareStatement(getRestNameQuery);
                             restStmt.setInt(1,getRestaurant.getInt("user_id"));
@@ -258,7 +258,7 @@ public class NearbyRestaurant {
             } else {
                 System.out.println("No this customer_id");
             }
-            System.out.println(finalResult);
+            //System.out.println(finalResult);
         } catch (SQLException e) {
             e.fillInStackTrace();
         }
@@ -305,34 +305,68 @@ public class NearbyRestaurant {
      */
     public static void main(String arg[])
     {
+
         NearbyRestaurant nearbyRestaurant = new NearbyRestaurant();
-        System.out.println(nearbyRestaurant.restaurantNearBy(1));
+
+        nearbyRestaurant.getCustomerAddress(1);
+        System.out.println(nearbyRestaurant.customerAddress);
+
+        ArrayList<Integer> e = new ArrayList<>();
+        e.add(1);
+        e.add(2);
+        e.add(3);
+        e.add(4);
+        e.add(5);
+        e.add(6);
+        e.add(7);
+        e.add(8);
+        e.add(9);
+        e.add(10);
+        e.add(11);
+        e.add(12);
+        e.add(13);
+        nearbyRestaurant.getRestaurantAddress(e);
+        for (int i=0;i<nearbyRestaurant.finalResult.size();i++){
+            System.out.println(nearbyRestaurant.finalResult.get(i));
+        }
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~`");
+        nearbyRestaurant.findRestaurantSameCity(1);
+
+        for (int i=0;i<nearbyRestaurant.addressArray.size();i++){
+            System.out.println(nearbyRestaurant.addressArray.get(i));
+        }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~`");
+        GetDistance getDistance =new GetDistance();
+        for (int i=0;i<nearbyRestaurant.addressArray.size();i++){
+            System.out.println(nearbyRestaurant.addressArray.get(i).get(1));
+            System.out.println(getDistance.getFloatDistance(nearbyRestaurant.customerAddress,nearbyRestaurant.addressArray.get(i).get(1)));
+        }
+
+
+
+/**
+        System.out.println(nearbyRestaurant.restaurantNearBy(2)+"\n");
 
         System.out.println("====================================");
 
-        nearbyRestaurant.findRestaurantSameCity(1);
+
         System.out.println(nearbyRestaurant.addressArray);
 
+        nearbyRestaurant.findRestaurantSameCity(1);
 
-
-        ArrayList<Integer> e = new ArrayList<>();
         e.add(1);
         e.add(4);
         e.add(3);
         e.add(7);
         nearbyRestaurant.getRestaurantAddress(e);
 
-
-
-
-
-        /**
         nearbyRestaurant.getCustomerAddress(1);
-        System.out.println(nearbyRestaurant.customerAddress);
+        //System.out.println(nearbyRestaurant.customerAddress);
         GetDistance getDistance = new GetDistance();
         //getDistance.getDistance(nearbyRestaurant.customerAdress,nearbyRestaurant.addressArray.get(0).get(1));
-        System.out.println(getDistance.getFloatDistance(nearbyRestaurant.customerAddress,nearbyRestaurant.addressArray.get(1).get(1))+"km");
-         **/
+        System.out.println(getDistance.getFloatDistance(nearbyRestaurant.customerAddress,nearbyRestaurant.addressArray.get(1).get(1)));
+**/
     }
 
 }

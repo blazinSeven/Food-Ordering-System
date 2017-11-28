@@ -53,7 +53,7 @@ public class CreditCardVerification {
     /**
      * A string that carries all exception messages
      */
-    public String message ="";
+    public String message;
 
     /**
      * This is a class that verifies the validity of the credit card details entered for payment
@@ -79,22 +79,25 @@ public class CreditCardVerification {
             message = "EXPIRY DATE ENTERED IS EITHER INVALID OR WRONG FORMAT";
         }
 
+        isCCNumberValid(ccNumber);
+        isCVVNumberValid(CVV);
+        isDateValid(userDate);
     }
 
     /**
      * Checks the validity of the entered Credit Card number using the length of numbers entered
-     * @param C Credit Card details entered by user
+     * @param ccNumber  Credit Card details entered by user
      * @return true if the Credit Card number entered is exactly 16 digits
      */
-    public boolean isCCNumberLengthValid(CreditCardVerification C){
+    public boolean isCCNumberLengthValid(String ccNumber){
 
         try {
 
-            if (C.ccNumber.length() < stdCCNumberDigit)
+            if (ccNumber.length() < stdCCNumberDigit)
                 throw new RuntimeException();
 
 
-            if (C.ccNumber.length() > stdCCNumberDigit)
+            if (ccNumber.length() > stdCCNumberDigit)
                 throw new RuntimeException();
         }
 
@@ -110,14 +113,14 @@ public class CreditCardVerification {
 
     /**
      * Checks the validity of the entered Credit Card number by checking if the numbers are actual integers
-     * @param C Credit Card details entered by user
+     * @param ccNumber Credit Card details entered by user
      * @return true if the Credit Card number entered are actual integers
      */
-    public boolean isCCNumberValid(CreditCardVerification C){
+    public boolean isCCNumberValid(String ccNumber){
 
         try{
 
-            Long.parseLong(C.ccNumber);
+            Long.parseLong(ccNumber);
         }
 
         catch(NumberFormatException e){
@@ -125,6 +128,7 @@ public class CreditCardVerification {
             message = "Error: CREDITCARD NUMBER ENTERED IS INVALID";
         }
 
+        isCCNumberLengthValid(ccNumber);
         return true;
     }
 
@@ -133,11 +137,11 @@ public class CreditCardVerification {
      * it is after the current date.
      * @return true if the expiry date entered by the user is after the current date
      */
-    public boolean isDateValid(){
+    public boolean isDateValid(Date date){
 
         try {
 
-            if (todayDate.after(userDate))
+            if (todayDate.after(date))
                 throw new RuntimeException();
         }
         catch (RuntimeException e){
@@ -150,18 +154,18 @@ public class CreditCardVerification {
 
     /**
      * Checks the validity of the entered CVV number using the length of numbers entered
-     * @param C Credit Card details entered by user
+     * @param CVV Credit Card details entered by user
      * @return true is the creditCardVerification card verification number entered is exactly 3 digits
      */
-    public boolean isCVVLengthValid(CreditCardVerification C){
+    public boolean isCVVLengthValid(String CVV){
 
         try {
 
-            if (C.CVV.length() < stdCVVDigits)
+            if (CVV.length() < stdCVVDigits)
                 throw new RuntimeException();
 
 
-            if (C.CVV.length() > stdCVVDigits)
+            if (CVV.length() > stdCVVDigits)
                 throw new RuntimeException();
         }
 
@@ -177,14 +181,14 @@ public class CreditCardVerification {
 
     /**
      * Checks the validity of the entered CVV number using the length of numbers entered
-     * @param C Credit Card details entered by user
+     * @param CVV Credit Card details entered by user
      * @return true is the creditCardVerification card verification number entered is exactly 3 digits
      */
-    public boolean isCVVNumberValid(CreditCardVerification C){
+    public boolean isCVVNumberValid(String CVV){
 
         try{
 
-            Integer.parseInt(C.CVV);
+            Integer.parseInt(CVV);
         }
 
         catch(NumberFormatException e){
@@ -192,27 +196,8 @@ public class CreditCardVerification {
             message = "Error: CVV ENTERED IS INVALID";
         }
 
+        isCVVLengthValid(CVV);
         return true;
-    }
-
-    /**
-     * Does all the Credit Card validation checks
-     * @param C Credit Card details entered by user
-     * @return
-     */
-    public boolean wasSuccessful(CreditCardVerification C){
-        try {
-            C.isCCNumberLengthValid(C);
-            C.isCVVNumberValid(C);
-            C.isCCNumberValid(C);
-            C.isCVVLengthValid(C);
-            C.isDateValid();
-        }
-
-        catch(RuntimeException e) {
-
-        }
-        return  true;
     }
 
     /**
@@ -221,13 +206,7 @@ public class CreditCardVerification {
     public static void main(String[] args)
     {
         CreditCardVerification CCard = new CreditCardVerification("1234123412341234", "0218","123");
-
-        try {
-            CCard.wasSuccessful(CCard);
-        }
-        catch (RuntimeException e){
-
-        }
+        System.out.println(CCard.message);
 
     }
 }

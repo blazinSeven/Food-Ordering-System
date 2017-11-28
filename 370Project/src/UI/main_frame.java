@@ -36,7 +36,6 @@ public class main_frame extends Application {
         user_account user_account = new user_account();
         //search search = new search();
         c_main_hbox center = new c_main_hbox();
-        sort sort = new sort(center);
         count count = new count();
 
 
@@ -58,7 +57,7 @@ public class main_frame extends Application {
 
 
         // add children
-        left.getChildren().addAll(blank,user_account,center.search(),sort,count,orders.checkout(),center.main_Button());
+        left.getChildren().addAll(blank,user_account,center.search(),center.setsort(),count,orders.checkout(),center.main_Button());
         MainPane.setLeft(left);
         MainPane.setCenter(center);
         Scene scene = new Scene(MainPane);

@@ -103,6 +103,9 @@ class Signed_In {
             if(login.message.equals("true"))
             {
                 u_id.getUserId(username.getText(),password.getText());
+                userId userId = new userId();
+                userId.setUserId(u_id.user_id);
+                System.out.println(userId.getUserId());
                 if (account_type ==1){
                     //pop();
                     personal.user_id = u_id.user_id;
