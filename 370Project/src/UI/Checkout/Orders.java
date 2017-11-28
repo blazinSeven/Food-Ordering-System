@@ -19,7 +19,7 @@ public class Orders {
     Payment_type payment_type = new Payment_type();
     Stage go_orders = new Stage();
     public Button checkout = new Button("CHECK OUT");
-    
+    CreditCardPayment ccp = new CreditCardPayment();
     //example stacks
     Stack<Label> ii;
     Stack<Label> tt;
@@ -68,7 +68,9 @@ public class Orders {
                 payment_type.cash.setDisable(false);
                 payment_type.credit.setDisable(false);
                 payment_type.debit.setDisable(false);
-                go_orders.close();
+                // if pay by credit card through project
+                orderPane.setCenter(ccp.pane());
+                //go_orders.close();
             }
             else{
                 payment_type.error.setText("Please choose the payment\n type first");

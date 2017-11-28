@@ -5,7 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
 
 /**
  * Create By Hao Li at Oct. 22th
@@ -32,9 +33,9 @@ public class lists {
     public lists(){
         sbt.sortByWaitingTime();
         index = sbt.sortByWaitingTimeRestId.size();
-        getRestaurant();
-        getaddress();
-        getRate();
+        getRestaurant(sbt.sortByWaitingTimeRestId);
+        getaddress(sbt.sortByWaitingTimeAddress);
+        getRate(sbt.sortByWaitingTimeRate);
 
     }
 
@@ -44,14 +45,14 @@ public class lists {
      * Put all the pictures from folder into Image[]
      * where id = pic_id
      */
-    public void getRestaurant(){
+    public void getRestaurant(ArrayList res){
         restaurant  = new Image[index];
         res_image = new ImageView[restaurant.length];
         int temp_r = index;
         while (temp_r !=0){
-            for (int i = 0; i < sbt.sortByWaitingTimeRestId.size();i++){
+            for (int i = 0; i < res.size();i++){
                 if (restaurant[i]==null){
-                    k = new Image("/restaurant_pic/"+sbt.sortByWaitingTimeRestId.get(i)+".jpg");
+                    k = new Image("/restaurant_pic/"+res.get(i)+".jpg");
                     restaurant[i] = k;
                 }
                 pic_number++;
@@ -73,13 +74,13 @@ public class lists {
 
     }
 
-    void getaddress(){
+    void getaddress(ArrayList address){
         Address = new Label[index];
         int temp_address = index;
         while (temp_address!=0){
-            for (int i=0;i<sbt.sortByWaitingTimeAddress.size();i++){
+            for (int i=0;i<address.size();i++){
                 Label temp_l = new Label();
-                temp_l.setText(sbt.sortByWaitingTimeAddress.get(i));
+                temp_l.setText(address.get(i).toString());
                 temp_l.setAlignment(Pos.CENTER);
                 temp_l.setStyle("-fx-background-image: url(/pictures/add_background.jpg)");
                 temp_l.setPrefSize(260,110);
@@ -90,13 +91,13 @@ public class lists {
 
     }
 
-    void getRate(){
+    void getRate(ArrayList rate){
         Rate = new Label[index];
         int temp_rate = index;
         while (temp_rate!=0) {
-            for (int i=0;i<sbt.sortByWaitingTimeRate.size();i++){
+            for (int i=0;i<rate.size();i++){
                 Label temp_r = new Label();
-                temp_r.setText(""+sbt.sortByWaitingTimeRate.get(i));
+                temp_r.setText(""+rate.get(i));
                 temp_r.setAlignment(Pos.CENTER);
                 temp_r.setStyle("-fx-background-image: url(/pictures/rate_background.jpg)");
                 temp_r.setPrefSize(260,110);

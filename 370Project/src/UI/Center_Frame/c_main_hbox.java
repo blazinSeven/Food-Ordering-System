@@ -1,9 +1,7 @@
 package UI.Center_Frame;
 
-import Search_Sort.SearchRestaurants;
-import Search_Sort.SearchDishes;
-import Search_Sort.SortByRating;
-import Search_Sort.SortByWaitingTime;
+import Search_Sort.*;
+import UI.Account.userId;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,7 +26,7 @@ public class c_main_hbox extends HBox {
     // for search use
     public TextField search_field = new TextField();
     // Label blank = new Label("                           ");
-    Button searchDish = new Button("Dish");
+    //Button searchDish = new Button("Dish");
     Button searchRestaurant = new Button("Restaura");
     Button reset = new Button("New");
 
@@ -37,8 +35,8 @@ public class c_main_hbox extends HBox {
     CheckBox s_d = new CheckBox();
     CheckBox s_p = new CheckBox();
 
-    SearchRestaurants searchRestaurants = new SearchRestaurants();
-    SearchDishes searchDishes = new SearchDishes();
+
+    //SearchDishes searchDishes = new SearchDishes();
 
     public lists res_lists = new lists();
     Button pre = new Button("Previous");
@@ -61,6 +59,7 @@ public class c_main_hbox extends HBox {
 
     // main accessing for all main list
     public c_main_hbox(){
+
         sbt.sortByWaitingTime();
         sbr.sortByRate();
         setPrefSize(620,450);
@@ -156,12 +155,7 @@ public class c_main_hbox extends HBox {
             public void handle(KeyEvent event) {
                 if (event.getCode()==KeyCode.ENTER) {
                     // For simplicity, we assume the user logged in is user_id 1
-                    searchRestaurants.Search(search_field.getText(),1);
-                    // Change the appearance of the middle frame
-                    System.out.println(searchRestaurants.finalResult);
-                    setSortByDistace(searchRestaurants.finalResult);
-                    set_button(3,new ArrayList<>(),new ArrayList<>(), new ArrayList<>(),searchRestaurants.finalResult);
-                    searchRestaurantResult = searchRestaurants.finalResult;
+
                     // tell others that now the customer is searching restaurants
                     SearchDishBoolean = false;
                     SearchRestaurantBoolean = true;
@@ -170,27 +164,12 @@ public class c_main_hbox extends HBox {
         });
         searchRestaurant.setOnAction(e->{
             // For simplicity, we assume the user logged in is user_id 1
-            searchRestaurants.Search(search_field.getText(),1);
+
             // Change the appearance of the middle frame
-            System.out.println(searchRestaurants.finalResult);
-            setSortByDistace(searchRestaurants.finalResult);
-            set_button(3,new ArrayList<>(),new ArrayList<>(), new ArrayList<>(),searchRestaurants.finalResult);
-            searchRestaurantResult = searchRestaurants.finalResult;
+
             // tell others that now the customer is searching restaurants
             SearchDishBoolean = false;
             SearchRestaurantBoolean = true;
-        });
-        searchDish.setOnAction(e->{
-            // For simplicity, we assume the user logged in is user_id 1
-            searchDishes.Search(search_field.getText(),1);
-            // Change the appearance of the middle frame
-            setSortByDistace(searchDishes.finalResult);
-            set_button(3,new ArrayList<>(),new ArrayList<>(), new ArrayList<>(),searchDishes.finalResult);
-            // Super array that contains all the information can be sorted
-            searchDishResult = searchDishes.finalResult;
-            // tell others that now the customer is searching dishes
-            SearchDishBoolean = true;
-            SearchRestaurantBoolean = false;
         });
         reset.setOnAction(e->{
             setLists();
@@ -206,7 +185,7 @@ public class c_main_hbox extends HBox {
             SearchRestaurantBoolean = false;
         });
         //reset.setPrefWidth(100);
-        holder.getChildren().addAll(reset,searchDish,searchRestaurant);
+        holder.getChildren().addAll(reset,searchRestaurant);
         return holder;
     }
 
@@ -311,155 +290,65 @@ public class c_main_hbox extends HBox {
 
     }
 
-    public void setsearch(int n){
-        restaurant_list.getChildren().clear();
-        restaurant_list.getChildren().add(name);
-        restaurant_list.getChildren().add(res_lists.res_image[n]);
+    public VBox setsort(){
+        VBox sort_hold = new VBox();
+        s_a.setText("Sort By Rate");
+        s_d.setText("Sort By Distance");
+        s_p.setText("Sort By Price");
+        s_w.setText("Sort By Waiting Time");
+        s_w.setOnAction(e->{
+            if (s_w.isSelected()) {
+                s_a.setSelected(false);
+                s_p.setSelected(false);
+                s_d.setSelected(false);
+                res_lists.getaddress(sbt.sortByWaitingTimeAddress);
+                res_lists.getRate(sbt.sortByWaitingTimeRate);
+                res_lists.getRestaurant(sbt.sortByWaitingTimeRestId);
+                setLists();
+            }else {
+                s_w.setSelected(false);
+            }
+        });
+
+        s_a.setOnAction(e->{
+            if (s_a.isSelected()){
+                s_w.setSelected(false);
+                s_p.setSelected(false);
+                s_d.setSelected(false);
+                res_lists.getaddress(sbr.sortByRateRestAddress);
+                res_lists.getRate(sbr.sortByRateRestRate);
+                res_lists.getRestaurant(sbr.sortByRateRestId);
+                setLists();
+            }
+            else{
+                s_a.setSelected(false);
+            }
+
+        });
+
+        s_d.setOnAction(e->{
+            if (s_d.isSelected()){
+                s_w.setSelected(false);
+                s_p.setSelected(false);
+                s_a.setSelected(false);
+                SortByDistance sbd = new SortByDistance(1);
+                res_lists.getaddress(sbd.sortByDistanceAddress);
+                res_lists.getRate(sbd.sortByDistanceRate);
+                res_lists.getRestaurant(sbd.sortByDistanceId);
+                setLists();
+
+            }
+            else {
+                s_d.setSelected(false);
+            }
+        });
+
+        //restaurant_list.getChildren().add(res_lists.res_image[n]);
+        sort_hold.setPrefSize(100,70);
+        sort_hold.getChildren().addAll(s_a,s_p,s_d,s_w);
+        return sort_hold;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * This function will change the order of the restaurant pictures showed in the centre of the list
-     * by the sorted order
-     *
-     * @param n, an arraylist of integers that represent the sorted order of the pictures
-     *
-     * @postcondition n is not null
-     */
-    public void setSort(ArrayList<Integer> n){
-        restaurant_list.getChildren().clear();
-        restaurant_list.getChildren().add(name);
-        for (int i = page_number;i<n.size();i++){
-            // if the imagine exists and restaurant_list does not yet have 4 pictures
-            if ((n.get(i) < res_lists.res_image.length) &&
-                    (res_lists.res_image[n.get(i)] != null) && (restaurant_list.getChildren().size() < 5)) {
-                restaurant_list.getChildren().add(res_lists.res_image[n.get(i)]);
-            }
-        }
-    }
-
-    /**
-     * This function will change the order of the restaurant pictures showed in the centre of the list
-     * by the sorted order.
-     * This function is called when the input is dish
-     *
-     * @param result
-     */
-    public void setSortBySuperArray(ArrayList<ArrayList<String>> result){
-        listOfPrice P = new listOfPrice();
-        P.listOfThePrice(result);
-        restaurant_list.getChildren().clear();
-        restaurant_list.getChildren().add(name);
-        for (int i = page_number;i<result.size();i++){
-            // if restaurant_list does not yet have 4 pictures
-            if (restaurant_list.getChildren().size() < 5) {
-                restaurant_list.getChildren().add(P.lists[i]);
-            }
-        }
-    }
-
-    // Following two functions are for SortByDistance
-    /**
-     * This function will change the information showed up
-     *
-     * @param result
-     */
-    public void setSortByDistace(ArrayList<ArrayList<String>> result){
-        listOfRestaurants R = new listOfRestaurants();
-        R.RestaurantList(result);
-        restaurant_list.getChildren().clear();
-        restaurant_list.getChildren().add(name);
-        for (int i = page_number;i<result.size();i++){
-            // if restaurant_list does not yet have 4 pictures
-            if (restaurant_list.getChildren().size() < 5) {
-                restaurant_list.getChildren().add(R.lists[i]);
-            }
-        }
-        rate_list.getChildren().clear();
-        rate_list.getChildren().add(rate);
-        for (int i = page_number;i<result.size();i++){
-            // if rate_list does not yet have 4 pictures
-            if (rate_list.getChildren().size() < 5) {
-                rate_list.getChildren().add(R.listOfRate[i]);
-            }
-        }
-
-        address_list.getChildren().clear();
-        address_list.getChildren().add(address);
-        for (int i = page_number;i<result.size();i++){
-            // if address_list does not yet have 4 pictures
-            if (address_list.getChildren().size() < 5) {
-                address_list.getChildren().add(R.listOfAddress[i]);
-            }
-        }
-
-
-    }
-
-
-
-    /**
-     * This function shows the rate of the restaurants
-     * Been called when sort by price
-     *
-     * @param result super array
-     */
-    public void setRateSuper(ArrayList<ArrayList<String>> result){
-        listOfPrice P = new listOfPrice();
-        P.listOfThePrice(result);
-        rate_list.getChildren().clear();
-        rate_list.getChildren().add(rate);
-        for (int i = page_number;i<result.size();i++){
-            // if rate_list does not yet have 4 pictures
-            if (rate_list.getChildren().size() < 5) {
-                rate_list.getChildren().add(P.listsOfRate[i]);
-            }
-        }
-    }
-
-    /**
-     * This function shows the rate of the restaurants
-     * Been called when sort by price/rate
-     *
-     * @param rateInput regular array that contains the rate
-     * @param waiting_time regular array that contains the waiting time
-     */
-    public void setRate(ArrayList<Integer> rateInput, ArrayList<Long> waiting_time){
-        listOfPrice P = new listOfPrice();
-        P.listOfRate(rateInput,waiting_time);
-        rate_list.getChildren().clear();
-        rate_list.getChildren().add(rate);
-        for (int i = page_number;i<rateInput.size();i++){
-            // if rate_list does not yet have 4 pictures
-            if (rate_list.getChildren().size() < 5) {
-                rate_list.getChildren().add(P.listsOfRate[i]);
-            }
-        }
-    }
-
-    public void clearAddress(){
-        address_list.getChildren().clear();
-    }
 
 
 
