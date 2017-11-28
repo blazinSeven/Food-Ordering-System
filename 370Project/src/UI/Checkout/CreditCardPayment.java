@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import Payment.*;
 import javafx.scene.layout.*;
 
 /**
@@ -78,6 +79,7 @@ public class CreditCardPayment extends Application {
             String number = CCNumber_field.getText();
             String expiry = expiryDate_field.getText();
             String cvv = cvv_field.getText();
+
             Payment.CreditCardVerification Verify = new Payment.CreditCardVerification(number,expiry,cvv);
 
             if (Verify.wasSuccessful(Verify)){
