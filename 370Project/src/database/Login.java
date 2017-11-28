@@ -10,7 +10,8 @@ import java.util.Scanner;
  * The main purpose of this class is to make a log in function, help to check if the username and
  * password that user input are correct or not
  */
-public class Login {
+public class Login
+{
 
     /**
      * new connection
@@ -21,6 +22,8 @@ public class Login {
      * public message to help other function know if they are correct or not
      */
     public String message = null;
+
+    public String status = "";
 
     /**
      * the username
@@ -40,9 +43,10 @@ public class Login {
         connection.connect();
         if(connection.coon!=null)
         {
-            try {
+            try
+            {
                 // check these variables are exist or not
-                String queryString = "select * from users where username=? and passwords=?";
+                String queryString = "select user_status from users where username=? and passwords=?";
                 PreparedStatement ppStmt = connection.coon.prepareStatement(queryString);
                 ppStmt.setString(1,username);
                 ppStmt.setString(2,password);
@@ -59,15 +63,25 @@ public class Login {
                     message = "true";
                     //user.loged_in();
                     name=username;
+                    if(rs.getString(1).equals("r"))
+                    {
+                        status = "restaurant";
+                    }
+                    else
+                    {
+                        status = "customers";
+                    }
                     System.out.println(message);
                     connection.coon.close();
                 }
-            }catch (SQLException e)
+            }
+            catch (SQLException e)
             {
                 e.printStackTrace();
             }
         }
     }
+
     public static void main(String arg[])
     {
         Login login = new Login();
@@ -77,5 +91,6 @@ public class Login {
         System.out.println("Please enter the password: \n");
         String password = in.nextLine();
         login.login(username,password);
+        System.out.println(login.status);
     }
 }
