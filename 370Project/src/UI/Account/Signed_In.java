@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 class Signed_In {
     // creation
+    int account_type = 1;
     private Login login = new Login();
     private Stage windows = new Stage();
     private Registration registration = new Registration();
@@ -101,18 +102,24 @@ class Signed_In {
             login.login(username.getText(),password.getText());
             if(login.message.equals("true"))
             {
-                //pop();
                 u_id.getUserId(username.getText(),password.getText());
-                personal.user_id = u_id.user_id;
-                d_u.getCustomerInfo(u_id.user_id);
-                personal.u_name = d_u.customer_last_name+" "+d_u.customer_first_name;
-                personal.u_address=d_u.customer_location;
-                personal.u_email = d_u.customer_email;
-                personal.phone_num = d_u.customer_phone_num;
-                personal.info.setText("Hi, "+login.name);
-                personal.address.setText(d_u.customer_location);
-                personal.setCheck(false);
-                setinfo();
+                if (account_type ==1){
+                    //pop();
+                    personal.user_id = u_id.user_id;
+                    d_u.getCustomerInfo(u_id.user_id);
+                    personal.u_name = d_u.customer_last_name+" "+d_u.customer_first_name;
+                    personal.u_address=d_u.customer_location;
+                    personal.u_email = d_u.customer_email;
+                    personal.phone_num = d_u.customer_phone_num;
+                    personal.info.setText("Hi, "+login.name);
+                    personal.address.setText(d_u.customer_location);
+                    personal.setCheck(false);
+                    setinfo();
+                }
+                else if (account_type ==2){
+
+                }
+
                 windows.close();
 
 

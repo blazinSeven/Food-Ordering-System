@@ -40,12 +40,12 @@ public class Sort {
         if (connection.coon == null){
             connection.connect();
         }
-        if (SearchDish == false){
+        if (!SearchDish){
             Query = "select * from restaurants where LOWER(restaurant_name) like ? ORDER BY user_id ASC";
             k = e.execute(Query,connection,search,"id");
             rate = e.execute(Query,connection,search,"user_id");
             waiting_time = e.getLong(Query,connection,search,"phone_num");
-        } else if (SearchDish == true) {
+        } else if (SearchDish) {
             // if super array is null, which means nothing is showed up
             if (inputResult.isEmpty()) {
                 System.err.println("No result");

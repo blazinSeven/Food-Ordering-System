@@ -2,10 +2,13 @@ package UI.Center_Frame;
 
 import Search_Sort.SearchRestaurants;
 import Search_Sort.SearchDishes;
+import Search_Sort.SortByRating;
+import Search_Sort.SortByWaitingTime;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -20,7 +23,8 @@ import java.util.ArrayList;
  */
 
 public class c_main_hbox extends HBox {
-
+    SortByWaitingTime sbt = new SortByWaitingTime();
+    SortByRating sbr = new SortByRating();
     // for search use
     public TextField search_field = new TextField();
     // Label blank = new Label("                           ");
@@ -28,7 +32,10 @@ public class c_main_hbox extends HBox {
     Button searchRestaurant = new Button("Restaura");
     Button reset = new Button("New");
 
-
+    CheckBox s_w = new CheckBox();
+    CheckBox s_a = new CheckBox();
+    CheckBox s_d = new CheckBox();
+    CheckBox s_p = new CheckBox();
 
     SearchRestaurants searchRestaurants = new SearchRestaurants();
     SearchDishes searchDishes = new SearchDishes();
@@ -54,6 +61,8 @@ public class c_main_hbox extends HBox {
 
     // main accessing for all main list
     public c_main_hbox(){
+        sbt.sortByWaitingTime();
+        sbr.sortByRate();
         setPrefSize(620,450);
         getChildren().addAll(res_name(),res_rate(),res_address());
         setPadding(new Insets(10,10,10,10));
@@ -64,7 +73,6 @@ public class c_main_hbox extends HBox {
      * Following three functions are the three vertical lists appear at the right of the main_frame
      * @return
      */
-
     // main layout for restaurant name list
     private VBox res_name(){
         restaurant_list = new VBox();
@@ -72,9 +80,9 @@ public class c_main_hbox extends HBox {
         name.setPrefSize(260,30);
         name.setAlignment(Pos.CENTER);
         //name.setStyle("-fx-background-color: steelblue");
-       // restaurant_list.setStyle("-fx-background-color: brown");
+        // restaurant_list.setStyle("-fx-background-color: brown");
         restaurant_list.getChildren().add(name);
-        for (int i = page_number;i<res_lists.res_image.length;i++){
+        for (int i =page_number;i<res_lists.res_image.length;i++){
             if (res_lists.res_image[i]!=null&&restaurant_list.getChildren().size()<5){
                 restaurant_list.getChildren().add(res_lists.res_image[i]);
             }
@@ -92,13 +100,14 @@ public class c_main_hbox extends HBox {
         rate.setPrefSize(140,30);
         rate.setAlignment(Pos.CENTER);
         rate.setStyle("-fx-background-color: steelblue");
-        rate_list.setStyle("-fx-background-color: aqua");
-
-        rate.setOnAction(e->{
-            // TODO
-        });
+        //rate_list.setStyle("-fx-background-color: aqua");
 
         rate_list.getChildren().addAll(rate);
+        for (int i=0;i<res_lists.Rate.length;i++){
+            if (res_lists.Rate[i]!=null && rate_list.getChildren().size()<5){
+                rate_list.getChildren().add(res_lists.Rate[i]);
+            }
+        }
         return rate_list;
     }
 
@@ -112,9 +121,14 @@ public class c_main_hbox extends HBox {
         address.setPrefSize(200,30);
         address.setAlignment(Pos.CENTER);
         address.setStyle("-fx-background-color: steelblue");
-        address_list.setStyle("-fx-background-color: deepskyblue");
+       // address_list.setStyle("-fx-background-color: deepskyblue");
 
-        address_list.getChildren().addAll(address);
+        address_list.getChildren().add(address);
+        for (int i =0;i<res_lists.Address.length;i++){
+            if(res_lists.Address[i]!=null && address_list.getChildren().size()<5){
+                address_list.getChildren().add(res_lists.Address[i]);
+            }
+        }
         return address_list;
     }
 
@@ -221,6 +235,8 @@ public class c_main_hbox extends HBox {
         pre.setOnAction(e->{
             if (page_number>=4){
                 page_number=page_number-4;
+                setLists();
+                /**
                 // start/reset
                 if (execute == 0){
                     setLists();
@@ -233,6 +249,7 @@ public class c_main_hbox extends HBox {
                 } else if (execute == 3){
                     setSortByDistace(result);
                 }
+                 **/
             }
             else {
                 System.out.println("pre");
@@ -241,8 +258,10 @@ public class c_main_hbox extends HBox {
         next.setOnAction(e->{
             if (page_number<8){
                 page_number=page_number+4;
+                setLists();
+                /**
                 if (execute == 0){
-                    setLists();
+
                 } else if (execute == 1){
                     setSort(n);
                     setRate(rate,waiting_time);
@@ -253,6 +272,7 @@ public class c_main_hbox extends HBox {
                 else if (execute == 3){
                     setSortByDistace(result);
                 }
+**/
             }
             else {
                 System.out.println("next");
@@ -268,12 +288,27 @@ public class c_main_hbox extends HBox {
 
     private void setLists(){
         restaurant_list.getChildren().clear();
+        rate_list.getChildren().clear();
+        address_list.getChildren().clear();
         restaurant_list.getChildren().add(name);
         for (int i =page_number;i<res_lists.res_image.length;i++){
             if (res_lists.res_image[i]!=null&&restaurant_list.getChildren().size()<5){
                 restaurant_list.getChildren().add(res_lists.res_image[i]);
             }
         }
+        address_list.getChildren().add(address);
+        for (int i =page_number;i<res_lists.Address.length;i++){
+            if(res_lists.Address[i]!=null && address_list.getChildren().size()<5){
+                address_list.getChildren().add(res_lists.Address[i]);
+            }
+        }
+        rate_list.getChildren().addAll(rate);
+        for (int i=page_number;i<res_lists.Rate.length;i++){
+            if (res_lists.Rate[i]!=null && rate_list.getChildren().size()<5){
+                rate_list.getChildren().add(res_lists.Rate[i]);
+            }
+        }
+
     }
 
     public void setsearch(int n){
@@ -281,6 +316,27 @@ public class c_main_hbox extends HBox {
         restaurant_list.getChildren().add(name);
         restaurant_list.getChildren().add(res_lists.res_image[n]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * This function will change the order of the restaurant pictures showed in the centre of the list

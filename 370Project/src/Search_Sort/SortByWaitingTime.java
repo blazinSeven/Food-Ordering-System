@@ -1,6 +1,8 @@
 package Search_Sort;
 
 import database.GoConnection;
+import javafx.scene.control.Label;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 /**
  * Yinsheng Dong Nov 21
  */
+
 public class SortByWaitingTime {
     public ArrayList<String> sortByWaitingTimeRestaurantName;
     public ArrayList<Integer> sortByWaitingTimeRestId;
@@ -66,9 +69,20 @@ public class SortByWaitingTime {
         sortByWaitingTime.sortByWaitingTime();
         System.out.println(sortByWaitingTime.sortByWaitingTimeRestId);
         System.out.println(sortByWaitingTime.sortByWaitingTimeRestaurantName);
+
+        /**
+        System.out.println(sortByWaitingTime.sortByWaitingTimeRestaurantName);
+        System.out.println(sortByWaitingTime.sortByWaitingTimeAddress);
+        System.out.println(sortByWaitingTime.sortByWaitingTimeRate);
+        System.out.println(sortByWaitingTime.message);
+**/
+
+
+
         System.out.println(sortByWaitingTime.sortByWaitingTimeAddress);
         System.out.println(sortByWaitingTime.sortByWaitingTimeRate);
         System.out.println(sortByWaitingTime.message);
 
     }
+
 }

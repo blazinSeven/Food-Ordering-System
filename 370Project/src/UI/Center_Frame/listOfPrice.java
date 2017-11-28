@@ -49,7 +49,6 @@ public class listOfPrice {
             VBox Temp = new VBox();
             Temp.setPrefSize(260,110);
             Temp.setStyle(cssLayout);
-
             Label Temp_up = new Label("Rate: " + result.get(i).get(4));
             Label Temp_down = new Label("Waiting time: " + result.get(i).get(5));
 
