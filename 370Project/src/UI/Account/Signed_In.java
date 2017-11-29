@@ -106,7 +106,7 @@ class Signed_In {
                 userId userId = new userId();
                 userId.setUserId(u_id.user_id);
                 System.out.println(userId.getUserId());
-                if (account_type ==1){
+                if (login.status.equals("customers")){
                     //pop();
                     personal.user_id = u_id.user_id;
                     d_u.getCustomerInfo(u_id.user_id);
@@ -119,7 +119,7 @@ class Signed_In {
                     personal.setCheck(false);
                     setinfo();
                 }
-                else if (account_type ==2){
+                else if (login.status.equals("restaurant")){
 
                 }
 
