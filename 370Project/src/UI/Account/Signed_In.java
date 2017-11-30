@@ -3,6 +3,7 @@ package UI.Account;
 import database.DisplayUserInformation;
 import database.GetUserId;
 import database.Login;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
 
 class Signed_In {
     // creation
-    int account_type = 1;
+
     private Login login = new Login();
     private Stage windows = new Stage();
     private Registration registration = new Registration();
@@ -40,7 +41,6 @@ class Signed_In {
         personal.address.setPrefSize(200,20);
         // call listener
         setinfo();
-
     }
 
     // info & address listeners. To change the text and function
@@ -51,7 +51,13 @@ class Signed_In {
             @Override
             public void handle(MouseEvent event) {
                 if (!personal.getCheck()){
-                    personal.PA();
+                    if (personal.gettype()){
+                        personal.PA();
+                    }
+                    else {
+                        System.out.println("there");
+                        personal.RS();
+                    }
                 }
                 else {
                     info();
@@ -60,7 +66,7 @@ class Signed_In {
         });
 
         // address listener
-        personal.address.setOnMousePressed(new EventHandler<MouseEvent>() {
+       personal.address.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if (!personal.getCheck()){
@@ -98,28 +104,39 @@ class Signed_In {
         PasswordField password = new PasswordField();
 
         // listener for submit button
-        submit.setOnAction(ActionEvent->{
+        submit.setOnAction((ActionEvent ActionEvent) ->{
             login.login(username.getText(),password.getText());
             if(login.message.equals("true"))
             {
                 u_id.getUserId(username.getText(),password.getText());
-                userId userId = new userId();
-                userId.setUserId(u_id.user_id);
-                System.out.println(userId.getUserId());
+                SetUserLogIn SetUserLogIn = new SetUserLogIn();
+                SetUserLogIn.setUserId(u_id.user_id);
                 if (login.status.equals("customers")){
                     //pop();
                     personal.user_id = u_id.user_id;
                     d_u.getCustomerInfo(u_id.user_id);
-                    personal.u_name = d_u.customer_last_name+" "+d_u.customer_first_name;
+                    personal.u_name = d_u.customer_first_name+" "+d_u.customer_last_name;
                     personal.u_address=d_u.customer_location;
                     personal.u_email = d_u.customer_email;
                     personal.phone_num = d_u.customer_phone_num;
                     personal.info.setText("Hi, "+login.name);
                     personal.address.setText(d_u.customer_location);
                     personal.setCheck(false);
+                    personal.setType(true);
                     setinfo();
                 }
                 else if (login.status.equals("restaurant")){
+                    personal.user_id = u_id.user_id;
+                    d_u.getCustomerInfo(u_id.user_id);
+                    personal.u_name = d_u.customer_first_name+" "+d_u.customer_last_name;
+                    personal.u_address=d_u.customer_location;
+                    personal.u_email = d_u.customer_email;
+                    personal.phone_num = d_u.customer_phone_num;
+                    personal.info.setText("Hi, "+login.name);
+                    personal.address.setText(d_u.customer_location);
+                    personal.setCheck(false);
+                    personal.setType(false);
+                    setinfo();
 
                 }
 

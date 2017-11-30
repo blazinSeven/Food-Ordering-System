@@ -52,6 +52,9 @@ public class DisplayDishes {
 
         //Print to console all food in the database
         testDisplay.displayDishes();
+        for (int i=0;i<testDisplay.dishesDisplay.size();i++){
+            System.out.println(testDisplay.dishesDisplay.get(i));
+        }
     }
 
 

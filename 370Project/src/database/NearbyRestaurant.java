@@ -61,7 +61,7 @@ public class NearbyRestaurant {
 
                     // after we got the user_id, we need to get the city, province of that customer
                     int userId = resultSet.getInt("user_id");
-                    //System.out.println(userId);
+                    //System.out.println(SetUserLogIn);
                     String checkUserInfoQuery = "select l.city, l.province from locations l where l.user_id = ? ";
                     PreparedStatement checkUserInfoStmt = connection.coon.prepareStatement(checkUserInfoQuery);
                     checkUserInfoStmt.setInt(1,userId);

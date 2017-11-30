@@ -21,16 +21,17 @@ import java.util.Objects;
 public class personal{
 
     //Creation
-    private Stage per_windows = new Stage();
+    Stage per_windows = new Stage();
+    Stage res_windows = new Stage();
     private Label separate = new Label("|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|");
-    Label info = new Label("Log In");
-    Label address = new Label("Signed Up");
+    Button info = new Button("LOG IN");
+    Button address = new Button("SIGN UP");
     private Label name = new Label();
     private Label info_address = new Label();
     private Button p_info = new Button("Personal Information");
     private Button c_password = new Button("Change Password");
     private Button f_food = new Button("Favorite");
-    private Button q = new Button("Log Out");
+    Button q = new Button("Log Out");
     Button c_button = new Button("Submit");
     PasswordField old_field = new PasswordField();
     PasswordField nword_field = new PasswordField();
@@ -46,6 +47,7 @@ public class personal{
 
     //check for info & address listener
     private boolean log_out = true;
+    private boolean type = true;
 
 
     // make frame for personal information
@@ -53,12 +55,11 @@ public class personal{
         // create pane, cant be static, I already tried it
         BorderPane borderPane = new BorderPane();
         HBox hleft = new HBox();
-
         // listener for buttons
         q.setOnAction(e->{
             per_windows.close();
-            info.setText("Log In");
-            address.setText("Signed Up");
+            info.setText("LOG IN");
+            address.setText("SIGN UP");
             setCheck(true);
         });
         p_info.setOnAction(e->borderPane.setCenter(information(u_name, u_address, u_email, phone_num)));
@@ -150,10 +151,10 @@ public class personal{
         /* hard code for information
           need change listener by database **/
         VBox vBox = new VBox();
-        Label n = new Label("Name: "+u_name);
-        Label ad = new Label("Address: "+u_address);
+        Label n = new Label("Name: "+name);
+        Label ad = new Label("Address: "+address);
         Label ph = new Label("Phone Number: "+phone_num);
-        Label em = new Label("E-mail Address: "+u_email);
+        Label em = new Label("E-mail Address: "+email);
 
         //set up size
         n.setPrefSize(260,90);
@@ -168,6 +169,79 @@ public class personal{
         vBox.getStylesheets().add("css/personal.css");
         return vBox;
     }
+
+
+
+    void RS(){
+        BorderPane res_pane = new BorderPane();
+
+        q.getStylesheets().add("css/quit.css");
+        res_pane.setStyle("-fx-background-image: url(/pictures/rightcenter.jpg)");
+        res_pane.setPrefSize(600,400);
+        res_pane.setLeft(res_holder());
+        Scene scene = new Scene(res_pane);
+        res_windows.setScene(scene);
+        res_windows.setMinWidth(600);
+        res_windows.setMinHeight(400);
+        res_windows.show();
+    }
+    VBox res_holder(){
+        VBox holder = new VBox();
+        holder.setPrefSize(180,390);
+        holder.setStyle("-fx-background-image: url(/pictures/leftbackground.jpeg)");
+        holder.getStylesheets().add("css/personal.css");
+        holder.getChildren().add(vBox());
+        return holder;
+    }
+
+
+    private GridPane restaurant_info(){
+        GridPane r_info = new GridPane();
+        Label name = new Label("Restaurant Name: ");
+        Label phone = new Label("Phone Number: ");
+        Label email = new Label("E-mail Address: ");
+        Label o_time = new Label("Open Time: ");
+        Label c_time = new Label("Close Time: ");
+        Label address = new Label("Address: ");
+        Label state = new Label("STATES: ");
+        Label welcome = new Label("Welcome");
+
+        Label r_name = new Label();
+        Label r_address = new Label();
+        Label r_email = new Label();
+        Label r_phone = new Label();
+        Label r_otime = new Label();
+        Label r_ctim = new Label();
+        Label r_state = new Label();
+
+
+
+        r_info.setPrefSize(400,400);
+        r_info.add(welcome,1,0);
+        r_info.add(name,0,1);
+        r_info.add(r_name,1,1);
+        r_info.add(phone,0,2);
+        r_info.add(r_phone,0,3);
+        r_info.add(o_time,0,4);
+        r_info.add(r_otime,0,5);
+        r_info.add(address,0,6);
+        r_info.add(r_address,0,7);
+        r_info.add(email,1,2);
+        r_info.add(r_email,1,3);
+        r_info.add(c_time,1,4);
+        r_info.add(r_ctim,1,5);
+        r_info.add(state,1,6);
+        r_info.add(r_state,1,7);
+
+
+
+        return r_info;
+    }
+
+
+
+
+
 
 
     //change password frame
@@ -212,6 +286,11 @@ public class personal{
     void setCheck(boolean n){
         log_out=n;
     }
-
+    boolean gettype(){
+        return type;
+    }
+    void setType(boolean n){
+        type = n;
+    }
 
 }

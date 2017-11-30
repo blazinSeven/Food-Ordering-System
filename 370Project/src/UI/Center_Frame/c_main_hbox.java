@@ -67,7 +67,7 @@ public class c_main_hbox extends HBox {
         setPrefSize(620,450);
         getChildren().addAll(res_name(),res_rate(),res_address());
         setPadding(new Insets(10,10,10,10));
-        //setStyle("-fx-background-color: coral");
+        setStyle("-fx-background-image: url(/pictures/background.jpg)");
     }
 
     /**
@@ -80,8 +80,7 @@ public class c_main_hbox extends HBox {
         restaurant_list.setPrefSize(260,450);
         name.setPrefSize(260,30);
         name.setAlignment(Pos.CENTER);
-        //name.setStyle("-fx-background-color: steelblue");
-        // restaurant_list.setStyle("-fx-background-color: brown");
+        name.setStyle("-fx-background-color: lightsteelblue");
         restaurant_list.getChildren().add(name);
         for (int i =page_number;i<res_lists.res_image.length;i++){
             if (res_lists.res_image[i]!=null&&restaurant_list.getChildren().size()<5){
@@ -100,8 +99,8 @@ public class c_main_hbox extends HBox {
 
         rate.setPrefSize(140,30);
         rate.setAlignment(Pos.CENTER);
-        rate.setStyle("-fx-background-color: steelblue");
-        //rate_list.setStyle("-fx-background-color: aqua");
+        rate.setStyle("-fx-background-color: lightsteelblue");
+
 
         rate_list.getChildren().addAll(rate);
         for (int i=0;i<res_lists.Rate.length;i++){
@@ -121,7 +120,7 @@ public class c_main_hbox extends HBox {
 
         address.setPrefSize(200,30);
         address.setAlignment(Pos.CENTER);
-        address.setStyle("-fx-background-color: steelblue");
+        address.setStyle("-fx-background-color: lightsteelblue");
        // address_list.setStyle("-fx-background-color: deepskyblue");
 
         address_list.getChildren().add(address);

@@ -86,7 +86,10 @@ public class DisplayMenus
     {
         DisplayMenus testMenu = new DisplayMenus();
         testMenu.displayAllMenus();
-        testMenu.displayItem(5);
+        testMenu.displayItem(1);
+        for (int i=0;i<testMenu.menusDisplay.size();i++){
+            System.out.println(testMenu.menusDisplay.get(i));
+        }
 
     }
 

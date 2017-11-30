@@ -150,7 +150,7 @@ public class DisplayUserInformation {
     public static void main(String arg[])
     {
         DisplayUserInformation displayUserInformation = new DisplayUserInformation();
-        displayUserInformation.getCustomerInfo(30);
+        displayUserInformation.getCustomerInfo(34);
         System.out.println(displayUserInformation.customer_first_name);
         System.out.println(displayUserInformation.rest_name+" "+
                 displayUserInformation.rest_open_time +" "+

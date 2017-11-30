@@ -19,7 +19,12 @@ public class user_account extends VBox{
         setPrefWidth(100);
         getStylesheets().add("css/acc_main.css");
         Signed_In signedIn = new Signed_In();
-        this.getChildren().addAll(signedIn.personal.info, signedIn.personal.address, checkBox());
+        signedIn.personal.info.setPrefSize(170,27);
+        signedIn.personal.address.setPrefSize(170,27);
+        signedIn.personal.info.getStylesheets().add("/css/login.css");
+        signedIn.personal.address.getStylesheets().add("/css/signedin.css");
+        this.getChildren().addAll(signedIn.personal.info,signedIn.personal.address, checkBox());
+
     }
 
 

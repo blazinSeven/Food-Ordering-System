@@ -44,11 +44,12 @@ class Registration {
         HBox check = new HBox();
         Button customer_check = new Button("Register as Customer");
         Button restaurant_check = new Button("Register as Restaurant");
-
+        // style
+        customer_check.getStylesheets().add("/css/reg_cus.css");
+        restaurant_check.getStylesheets().add("/css/reg_res.css");
 
         //listener for 2 buttons
         customer_check.setOnAction(e->customerReg());
-
         restaurant_check.setOnAction(e->restaurantReg());
         //set size
         customer_check.setMinSize(50, 200);

@@ -88,7 +88,7 @@ public class lists {
                 Label temp_l = new Label();
                 temp_l.setText(address.get(i).toString());
                 temp_l.setAlignment(Pos.CENTER);
-                temp_l.setStyle("-fx-background-image: url(/pictures/add_background.jpg)");
+                temp_l.setStyle("-fx-background-image: url(/pictures/cornsilk.png)");
                 temp_l.setPrefSize(260,110);
                 Address[i] = temp_l;
             }
@@ -105,7 +105,7 @@ public class lists {
                 Label temp_r = new Label();
                 temp_r.setText(""+rate.get(i));
                 temp_r.setAlignment(Pos.CENTER);
-                temp_r.setStyle("-fx-background-image: url(/pictures/rate_background.jpg)");
+                temp_r.setStyle("-fx-background-image: url(/pictures/lightcyan.png)");
                 temp_r.setPrefSize(260,110);
                 Rate[i]=temp_r;
             }

@@ -156,21 +156,36 @@ public class Orders {
      **/
     Stack setIi(){
         ii = new Stack<>();
-        for (int i = 0; i< 10; i++){
-            Label temp = new Label("Ordered Food "+i);
-            temp.setPrefWidth(100);
-            temp.setAlignment(Pos.CENTER);
-            ii.push(temp);
-        }
+        Label temp1 = new Label("Middle Size Fries ");
+        Label temp2= new Label("Teen Burger ");
+        Label temp3 = new Label("Veggie Deluxe ");
+        Label temp4 = new Label("Check Strips");
+        Label temp5 = new Label("Dipping Sauce ");
+        Label temp6 = new Label("Coke Zero ");
+        ii.push(temp1);
+        ii.push(temp2);
+        ii.push(temp3);
+        ii.push(temp4);
+        ii.push(temp5);
+        ii.push(temp6);
+
         return ii;
     }
 
     Stack settt(){
         tt = new Stack<>();
-        for (int i = 0; i< 10; i++){
-            Label temp = new Label("X"+i);
-            tt.push(temp);
-        }
+        Label temp1 = new Label("X 1");
+        Label temp2 = new Label("X 2");
+        Label temp3 = new Label("X 1");
+        Label temp4 = new Label("X 4");
+        Label temp5 = new Label("X 1");
+        Label temp6 = new Label("X 4");
+        tt.push(temp1);
+        tt.push(temp2);
+        tt.push(temp3);
+        tt.push(temp4);
+        tt.push(temp5);
+        tt.push(temp6);
         return tt;
     }
 }

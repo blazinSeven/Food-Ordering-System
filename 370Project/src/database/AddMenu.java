@@ -129,7 +129,7 @@ public class AddMenu {
     public static void main(String args[])
     {
         AddMenu addMenu = new AddMenu();
-        addMenu.AddMenu(1, "SANDWICHES & WRAPS");
+        addMenu.AddMenu(1, "Apple Chese");
         System.out.println(addMenu.message);
     }
 }
