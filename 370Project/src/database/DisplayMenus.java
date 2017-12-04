@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class DisplayMenus
 {
 
-    private ArrayList menusDisplay = null;
+    public ArrayList menusDisplay = null;
     GoConnection connection = new GoConnection();
 
 
@@ -21,11 +21,11 @@ public class DisplayMenus
      Out:  Nothing is returned, menus in the database are printed to the console.
            the function queries the sql database for the name of all food in the database.
      */
-    public void displayAllMenus()
+    public void displayAllMenus(int restaurant_id)
     {
         connection.connect();
         if (connection.coon != null) {
-            String selectQuery = "SELECT * FROM menus";
+            String selectQuery = "SELECT m.menu_name, r.id FROM restaurants r join menus m on m.restaurant_id = "+restaurant_id;
             try {
                 Statement stmt = connection.coon.createStatement();
                 ResultSet results = stmt.executeQuery(selectQuery);
@@ -36,7 +36,7 @@ public class DisplayMenus
                     rowCount++;
                 }
                 System.out.println("Total Menus: " + rowCount);
-
+                connection.coon.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -55,7 +55,7 @@ public class DisplayMenus
         connection.connect();
         if(connection.coon != null)
         {
-            String selectQuery = "SELECT dish_name FROM menus m, dishes d WHERE d.id = m.menu_id";
+            String selectQuery = "SELECT dish_name FROM dishes d left join menus m on d.id = m.menu_id";
             try
             {
                 Statement stmt = connection.coon.createStatement();
@@ -85,8 +85,9 @@ public class DisplayMenus
     public static void main(String[] args)
     {
         DisplayMenus testMenu = new DisplayMenus();
-        testMenu.displayAllMenus();
-        testMenu.displayItem(1);
+        testMenu.displayAllMenus(1);
+        //testMenu.displayItem(1);
+        System.out.println(testMenu.menusDisplay.size());
         for (int i=0;i<testMenu.menusDisplay.size();i++){
             System.out.println(testMenu.menusDisplay.get(i));
         }

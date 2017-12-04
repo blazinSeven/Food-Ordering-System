@@ -1,16 +1,12 @@
 package UI;
 
-import UI.Account.user_account;
-import UI.Center_Frame.c_main_hbox;
-import UI.Checkout.Orders;
+import UI.Center_Frame.main_controller;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
  * Create By Hao Li at Oct. 15th
@@ -23,7 +19,7 @@ public class main_frame extends Application {
     VBox left = new VBox();
     StackPane blank = new StackPane();
 
-    Orders orders = new Orders();
+    //Orders orders = new Orders();
 
 
 
@@ -33,9 +29,9 @@ public class main_frame extends Application {
         ImageView logo = new ImageView(new Image("/pictures/log.png"));
         logo.setFitHeight(80);
         logo.setFitWidth(160);
-        user_account user_account = new user_account();
+
         //search search = new search();
-        c_main_hbox center = new c_main_hbox();
+        main_controller center = new main_controller();
         count count = new count();
 
 
@@ -57,7 +53,7 @@ public class main_frame extends Application {
 
 
         // add children
-        left.getChildren().addAll(blank,user_account,center.search(),center.setsort(),count,orders.checkout(),center.main_Button());
+        left.getChildren().addAll(blank,center.user_account,center.search(),center.setsort(),count,center.orders.checkout(),center.main_Button());
         MainPane.setLeft(left);
         MainPane.setCenter(center);
         Scene scene = new Scene(MainPane);

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Place_Order{
@@ -69,7 +70,7 @@ public class Place_Order{
 
     
     // update listview for type of items 
-    void UpdateChose(Stack<Label> items){
+    public void UpdateChose(ArrayList<Label> items){
         chose.clear();
         for (int i=items.size()-1; i>=0;i--){
             Label temp = items.get(i);
@@ -79,10 +80,10 @@ public class Place_Order{
     }
     
     // update listview for number of items
-    void Updatenumber(Stack<Label> items){
+    public void Updatenumber(ArrayList<Integer> items){
         number.clear();
         for (int i=items.size()-1; i>=0;i--){
-            Label temp = items.get(i);
+            Label temp = new Label("X "+items.get(i));
             number.add(temp);
         }
 

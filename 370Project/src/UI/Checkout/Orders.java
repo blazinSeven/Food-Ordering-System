@@ -2,7 +2,7 @@ package UI.Checkout;
 /**
  * Create By Hao Li at Nov. 7th
  */
-import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,25 +14,26 @@ import javafx.stage.Stage;
 import java.util.Stack;
 
 public class Orders {
-    Place_Order place_order = new Place_Order();
+    public Place_Order place_order = new Place_Order();
     //Item_collection item_collection = new Item_collection();
     Payment_type payment_type = new Payment_type();
     Stage go_orders = new Stage();
     public Button checkout = new Button("CHECK OUT");
     CreditCardPayment ccp = new CreditCardPayment();
     //example stacks
-    Stack<Label> ii;
-    Stack<Label> tt;
 
     public Button checkout(){
         checkout.setPrefSize(180,60);
         checkout.getStylesheets().add("css/checkout.css");
         //for check out button
+        /**
         checkout.setOnAction(e->{
             orders();
+            //TODO
             place_order.UpdateChose(setIi());
             place_order.Updatenumber(settt());
         });
+         **/
         //set up Modality
         go_orders.initModality(Modality.APPLICATION_MODAL);
         return checkout;
@@ -149,43 +150,6 @@ public class Orders {
 
         go_orders.show();
     }
-    
-    
-    /**
-     Example code for how to change and use update listviews, need to replace by real data from data base
-     **/
-    Stack setIi(){
-        ii = new Stack<>();
-        Label temp1 = new Label("Middle Size Fries ");
-        Label temp2= new Label("Teen Burger ");
-        Label temp3 = new Label("Veggie Deluxe ");
-        Label temp4 = new Label("Check Strips");
-        Label temp5 = new Label("Dipping Sauce ");
-        Label temp6 = new Label("Coke Zero ");
-        ii.push(temp1);
-        ii.push(temp2);
-        ii.push(temp3);
-        ii.push(temp4);
-        ii.push(temp5);
-        ii.push(temp6);
 
-        return ii;
-    }
 
-    Stack settt(){
-        tt = new Stack<>();
-        Label temp1 = new Label("X 1");
-        Label temp2 = new Label("X 2");
-        Label temp3 = new Label("X 1");
-        Label temp4 = new Label("X 4");
-        Label temp5 = new Label("X 1");
-        Label temp6 = new Label("X 4");
-        tt.push(temp1);
-        tt.push(temp2);
-        tt.push(temp3);
-        tt.push(temp4);
-        tt.push(temp5);
-        tt.push(temp6);
-        return tt;
-    }
 }

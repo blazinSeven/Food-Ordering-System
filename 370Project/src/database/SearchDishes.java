@@ -61,6 +61,8 @@ public class SearchDishes {
     {
         SearchDishes searchDish = new SearchDishes();
         searchDish.SearchDishes("1");
+        System.out.println(searchDish.dishFound);
+
 
     }
 

@@ -72,7 +72,7 @@ public class DisplayUserInformation {
                         customer_email = resultSet1.getString("e_mail_address");
                         customer_phone_num = resultSet1.getString("phone_num");
                         customer_pref_food = resultSet1.getString("pref_food");
-                        message = "find the personal info";
+                        message = "find the account_info info";
                     }
                     else
                     {

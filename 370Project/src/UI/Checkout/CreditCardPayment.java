@@ -1,13 +1,9 @@
 package UI.Checkout;
 
-import Payment.CreditCardVerification;
-import javafx.application.Application;
-import javafx.scene.Scene;
+import UI.Checkout.Credit_Card_Check.CreditCardVerification;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import Payment.*;
 import javafx.scene.layout.*;
 
 /**
